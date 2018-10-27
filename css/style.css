@@ -609,6 +609,7 @@ body {
   padding: 0;
   list-style-type: none;
   line-height: 15px;
+  margin-top: 3px;
 }
 #header #nav ul a {
   margin-right: 15px;
