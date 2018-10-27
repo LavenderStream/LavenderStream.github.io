@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="原网页：http://www.blogjava.net/china-qd/archive/2006/04/29/44002.htmlJni中C++和Java的参数传递 如何使用JNI的一些基本方法和过程在网上多如牛毛，如果你对Jni不甚了解，不知道Jni是做什么的，如何建立一个基本的jni程序，或许可以参考下面下面这些文章:利用VC++6.0实现JNI的最简单的例子JNI入门教程之HelloWor">
+    <meta name="description" content="原网页：http://www.blogjava.net/china-qd/archive/2006/04/29/44002.htmlJni中C++和Java的参数传递如何使用JNI的一些基本方法和过程在网上多如牛毛，如果你对Jni不甚了解，不知道Jni是做什么的，如何建立一个基本的jni程序，或许可以参考下面下面这些文章:利用VC++6.0实现JNI的最简单的例子JNI入门教程之HelloWorl">
 <meta name="keywords" content="android javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android -- jni 形参以及返回值">
 <meta property="og:url" content="https://lavenderstream.github.io/2015/12/27/Android-jni-形参以及返回值/index.html">
 <meta property="og:site_name" content="Tiny hexo">
-<meta property="og:description" content="原网页：http://www.blogjava.net/china-qd/archive/2006/04/29/44002.htmlJni中C++和Java的参数传递 如何使用JNI的一些基本方法和过程在网上多如牛毛，如果你对Jni不甚了解，不知道Jni是做什么的，如何建立一个基本的jni程序，或许可以参考下面下面这些文章:利用VC++6.0实现JNI的最简单的例子JNI入门教程之HelloWor">
+<meta property="og:description" content="原网页：http://www.blogjava.net/china-qd/archive/2006/04/29/44002.htmlJni中C++和Java的参数传递如何使用JNI的一些基本方法和过程在网上多如牛毛，如果你对Jni不甚了解，不知道Jni是做什么的，如何建立一个基本的jni程序，或许可以参考下面下面这些文章:利用VC++6.0实现JNI的最简单的例子JNI入门教程之HelloWorl">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2018-10-27T03:17:39.611Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android -- jni 形参以及返回值">
-<meta name="twitter:description" content="原网页：http://www.blogjava.net/china-qd/archive/2006/04/29/44002.htmlJni中C++和Java的参数传递 如何使用JNI的一些基本方法和过程在网上多如牛毛，如果你对Jni不甚了解，不知道Jni是做什么的，如何建立一个基本的jni程序，或许可以参考下面下面这些文章:利用VC++6.0实现JNI的最简单的例子JNI入门教程之HelloWor">
+<meta name="twitter:description" content="原网页：http://www.blogjava.net/china-qd/archive/2006/04/29/44002.htmlJni中C++和Java的参数传递如何使用JNI的一些基本方法和过程在网上多如牛毛，如果你对Jni不甚了解，不知道Jni是做什么的，如何建立一个基本的jni程序，或许可以参考下面下面这些文章:利用VC++6.0实现JNI的最简单的例子JNI入门教程之HelloWorl">
     
     
         
@@ -141,14 +141,9 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>原网页：<a href="http://www.blogjava.net/china-qd/archive/2006/04/29/44002.html" target="_blank" rel="noopener">http://www.blogjava.net/china-qd/archive/2006/04/29/44002.html</a><br>Jni中C++和Java的参数传递</p>
-<p>如何使用JNI的一些基本方法和过程在网上多如牛毛，如果你对Jni不甚了解，不知道Jni是做什么的，如何建立一个基本的jni程序，或许可以参考下面下面这些文章:<br>利用VC++6.0实现JNI的最简单的例子<br>JNI入门教程之HelloWorld篇<br>SUN JNI Tutorial</p>
-<p>这些资料的例子中，大多数只是输入一些简单的参数，获取没有参数。而在实际的使用过程中，往往需要对参数进行处理转换。才可以被C/C++程序识别。比如我们在C++中有一个结构（Struct）DiskInfo ,需要传递一个类似于DiskInfo *pDiskInfo的参数，类似于在C++这样参数如何传递到Java中呢？下面我们就来讨论C++到Java中方法的一些常见参数的转换:<br>定义Native Java类：</p>
-<p>如果你习惯了使用JNI，你就不会觉得它难了。既然本地方法是由其他语言实现的，它们在Java中没有函数体。但是，所有本地代码必须用本地关键词声明，成为Java类的成员。假设我们在C++中有这么一个结构，它用来描述硬盘信息：<br> // 硬盘信息<br> struct    {<br>     char  name[ 256 ];<br>     int  serial;<br>} DiskInfo;<br>那么我们需要在Java中定义一个类来与之匹配，声明可以写成这样：<br> class  DiskInfo  {<br>     // 名字<br>      public  String name;</p>
-<pre><code>// 序列号 
+    <p>原网页：<a href="http://www.blogjava.net/china-qd/archive/2006/04/29/44002.html" target="_blank" rel="noopener">http://www.blogjava.net/china-qd/archive/2006/04/29/44002.html</a><br>Jni中C++和Java的参数传递</p><p>如何使用JNI的一些基本方法和过程在网上多如牛毛，如果你对Jni不甚了解，不知道Jni是做什么的，如何建立一个基本的jni程序，或许可以参考下面下面这些文章:<br>利用VC++6.0实现JNI的最简单的例子<br>JNI入门教程之HelloWorld篇<br>SUN JNI Tutorial</p><p>这些资料的例子中，大多数只是输入一些简单的参数，获取没有参数。而在实际的使用过程中，往往需要对参数进行处理转换。才可以被C/C++程序识别。比如我们在C++中有一个结构（Struct）DiskInfo ,需要传递一个类似于DiskInfo *pDiskInfo的参数，类似于在C++这样参数如何传递到Java中呢？下面我们就来讨论C++到Java中方法的一些常见参数的转换:<br>定义Native Java类：</p><p>如果你习惯了使用JNI，你就不会觉得它难了。既然本地方法是由其他语言实现的，它们在Java中没有函数体。但是，所有本地代码必须用本地关键词声明，成为Java类的成员。假设我们在C++中有这么一个结构，它用来描述硬盘信息：<br>// 硬盘信息<br>struct {<br>char name[ 256 ];<br>int serial;<br>} DiskInfo;<br>那么我们需要在Java中定义一个类来与之匹配，声明可以写成这样：<br>class DiskInfo {<br>// 名字<br>public String name;</p><pre><code>// 序列号 
  public   int  serial;
-</code></pre><p>}<br>在这个类中，申明一些Native的本地方法，来测试方法参数的传递，分别定义了一些函数，用来传递结构或者结构数组，具体定义如下面代码：<br> /<em> <strong><strong><strong><em>**</em></strong></strong></strong></em> 定义本地方法 <strong><strong><strong><strong>***</strong></strong></strong></strong> */<br>     // 输入常用的数值类型(Boolean,Byte,Char,Short,Int,Float,Double)<br>      public  native  void  displayParms(String showText,  int  i, boolean bl);</p>
-<pre><code>// 调用一个静态方法 
+</code></pre><p>}<br>在这个类中，申明一些Native的本地方法，来测试方法参数的传递，分别定义了一些函数，用来传递结构或者结构数组，具体定义如下面代码：<br>/<em> <strong><strong><strong><em>**</em></strong></strong></strong></em> 定义本地方法 <strong><strong><strong><strong>***</strong></strong></strong></strong> */<br>// 输入常用的数值类型(Boolean,Byte,Char,Short,Int,Float,Double)<br>public native void displayParms(String showText, int i, boolean bl);</p><pre><code>// 调用一个静态方法 
  public  native  int  add( int  a,  int  b);
 
 // 输入一个数组 
@@ -162,14 +157,7 @@
 
 // 返回一个结构数组 
  public  native DiskInfo[] getStructArray();
-</code></pre><p>编译生成C/C++头文件 </p>
-<p>定义好了Java类之后，接下来就要写本地代码。本地方法符号提供一个满足约定的头文件，使用Java工具Javah可以很容易地创建它而不用手动去创建。你对Java的class文件使用javah命令，就会为你生成一个对应的C/C++头文件。<br>1、在控制台下进入工作路径，本工程路径为：E:\work\java\workspace\JavaJni。<br>2、运行javah 命令：javah -classpath E:\work\java\workspace\JavaJni com.sundy.jnidemo ChangeMethodFromJni<br>本文生成的C/C++头文件名为: com_sundy_jnidemo_ChangeMethodFromJni.h </p>
-<p>在C/C++中实现本地方法</p>
-<p>生成C/C++头文件之后，你就需要写头文件对应的本地方法。注意：所有的本地方法的第一个参数都是指向JNIEnv结构的。这个结构是用来调用JNI函数的。第二个参数jclass的意义，要看方法是不是静态的（static）或者实例（Instance）的。前者，jclass代表一个类对象的引用，而后者是被调用的方法所属对象的引用。<br>返回值和参数类型根据等价约定映射到本地C/C++类型，如表JNI类型映射所示。有些类型，在本地代码中可直接使用，而其他类型只有通过JNI调用操作。<br>表A<br>Java 类型    本地类型    描述<br>boolean    jboolean    C/C++8位整型<br>byte    jbyte    C/C++带符号的8位整型<br>char    jchar    C/C++无符号的16位整型<br>short    jshort    C/C++带符号的16位整型<br>int    jint    C/C++带符号的32位整型<br>long    jlong    C/C++带符号的64位整型e<br>float    jfloat    C/C++32位浮点型<br>double    jdouble    C/C++64位浮点型<br>Object    jobject    任何Java对象，或者没有对应java类型的对象<br>Class    jclass    Class对象<br>String    jstring    字符串对象<br>Object[]    jobjectArray    任何对象的数组<br>boolean[]    jbooleanArray    布尔型数组<br>byte[]    jbyteArray    比特型数组<br>char[]    jcharArray    字符型数组<br>short[]    jshortArray    短整型数组<br>int[]    jintArray    整型数组<br>long[]    jlongArray    长整型数组<br>float[]    jfloatArray    浮点型数组<br>double[]    jdoubleArray    双浮点型数组<br>※     JNI类型映射<br>使用数组：</p>
-<p>JNI通过JNIEnv提供的操作Java数组的功能。它提供了两个函数：一个是操作java的简单型数组的，另一个是操作对象类型数组的。<br>因为速度的原因，简单类型的数组作为指向本地类型的指针暴露给本地代码。因此，它们能作为常规的数组存取。这个指针是指向实际的Java数组或者Java数组的拷贝的指针。另外，数组的布置保证匹配本地类型。<br>为了存取Java简单类型的数组，你就要要使用GetXXXArrayElements函数（见表B），XXX代表了数组的类型。这个函数把Java数组看成参数，返回一个指向对应的本地类型的数组的指针。<br>表B<br>函数    Java 数组类型    本地类型<br>GetBooleanArrayElements    jbooleanArray    jboolean<br>GetByteArrayElements    jbyteArray    jbyte<br>GetCharArrayElements    jcharArray    jchar<br>GetShortArrayElements    jshortArray    jshort<br>GetIntArrayElements    jintArray    jint<br>GetLongArrayElements    jlongArray    jlong<br>GetFloatArrayElements    jfloatArray    jfloat<br>GetDoubleArrayElements    jdoubleArray    jdouble<br>JNI数组存取函数<br>当你对数组的存取完成后，要确保调用相应的ReleaseXXXArrayElements函数，参数是对应Java数组和GetXXXArrayElements返回的指针。如果必要的话，这个释放函数会复制你做的任何变化（这样它们就反射到java数组），然后释放所有相关的资源。<br>为了使用java对象的数组，你必须使用GetObjectArrayElement函数和SetObjectArrayElement函数，分别去get，set数组的元素。GetArrayLength函数会返回数组的长度。<br>使用对象</p>
-<p>JNI提供的另外一个功能是在本地代码中使用Java对象。通过使用合适的JNI函数，你可以创建Java对象，get、set 静态(static)和实例（instance）的域，调用静态(static)和实例（instance）函数。JNI通过ID识别域和方法，一个域或方法的ID是任何处理域和方法的函数的必须参数。<br>表C列出了用以得到静态(static)和实例（instance）的域与方法的JNI函数。每个函数接受（作为参数）域或方法的类，它们的名称，符号和它们对应返回的jfieldID或jmethodID。<br>表C<br>函数    描述<br>GetFieldID    得到一个实例的域的ID<br>GetStaticFieldID    得到一个静态的域的ID<br>GetMethodID    得到一个实例的方法的ID<br>GetStaticMethodID    得到一个静态方法的ID<br>※域和方法的函数<br>如果你有了一个类的实例，它就可以通过方法GetObjectClass得到，或者如果你没有这个类的实例，可以通过FindClass得到。符号是从域的类型或者方法的参数，返回值得到字符串，如表D所示。<br>表D<br>Java 类型    符号<br>boolean    Z<br>byte    B<br>char    C<br>short    S<br>int    I<br>long    L<br>float    F<br>double    D<br>void    V<br>objects对象    Lfully-qualified-class-name;L类名<br>Arrays数组    [array-type [数组类型<br>methods方法    (argument-types)return-type(参数类型)返回类型<br>※确定域和方法的符号</p>
-<p>下面我们来看看，如果通过使用数组和对象，从C++中的获取到Java中的DiskInfo 类对象，并返回一个DiskInfo数组:<br>//返回一个结构数组，返回一个硬盘信息的结构数组<br>JNIEXPORT jobjectArray JNICALL Java_com_sundy_jnidemo_ChangeMethodFromJni_getStructArray<br>(JNIEnv *env, jobject _obj)<br>{<br>    //申明一个object数组<br>    jobjectArray args = 0;</p>
-<pre><code>//数组大小
+</code></pre><p>编译生成C/C++头文件</p><p>定义好了Java类之后，接下来就要写本地代码。本地方法符号提供一个满足约定的头文件，使用Java工具Javah可以很容易地创建它而不用手动去创建。你对Java的class文件使用javah命令，就会为你生成一个对应的C/C++头文件。<br>1、在控制台下进入工作路径，本工程路径为：E:\work\java\workspace\JavaJni。<br>2、运行javah 命令：javah -classpath E:\work\java\workspace\JavaJni com.sundy.jnidemo ChangeMethodFromJni<br>本文生成的C/C++头文件名为: com_sundy_jnidemo_ChangeMethodFromJni.h</p><p>在C/C++中实现本地方法</p><p>生成C/C++头文件之后，你就需要写头文件对应的本地方法。注意：所有的本地方法的第一个参数都是指向JNIEnv结构的。这个结构是用来调用JNI函数的。第二个参数jclass的意义，要看方法是不是静态的（static）或者实例（Instance）的。前者，jclass代表一个类对象的引用，而后者是被调用的方法所属对象的引用。<br>返回值和参数类型根据等价约定映射到本地C/C++类型，如表JNI类型映射所示。有些类型，在本地代码中可直接使用，而其他类型只有通过JNI调用操作。<br>表A<br>Java 类型 本地类型 描述<br>boolean jboolean C/C++8位整型<br>byte jbyte C/C++带符号的8位整型<br>char jchar C/C++无符号的16位整型<br>short jshort C/C++带符号的16位整型<br>int jint C/C++带符号的32位整型<br>long jlong C/C++带符号的64位整型e<br>float jfloat C/C++32位浮点型<br>double jdouble C/C++64位浮点型<br>Object jobject 任何Java对象，或者没有对应java类型的对象<br>Class jclass Class对象<br>String jstring 字符串对象<br>Object[] jobjectArray 任何对象的数组<br>boolean[] jbooleanArray 布尔型数组<br>byte[] jbyteArray 比特型数组<br>char[] jcharArray 字符型数组<br>short[] jshortArray 短整型数组<br>int[] jintArray 整型数组<br>long[] jlongArray 长整型数组<br>float[] jfloatArray 浮点型数组<br>double[] jdoubleArray 双浮点型数组<br>※ JNI类型映射<br>使用数组：</p><p>JNI通过JNIEnv提供的操作Java数组的功能。它提供了两个函数：一个是操作java的简单型数组的，另一个是操作对象类型数组的。<br>因为速度的原因，简单类型的数组作为指向本地类型的指针暴露给本地代码。因此，它们能作为常规的数组存取。这个指针是指向实际的Java数组或者Java数组的拷贝的指针。另外，数组的布置保证匹配本地类型。<br>为了存取Java简单类型的数组，你就要要使用GetXXXArrayElements函数（见表B），XXX代表了数组的类型。这个函数把Java数组看成参数，返回一个指向对应的本地类型的数组的指针。<br>表B<br>函数 Java 数组类型 本地类型<br>GetBooleanArrayElements jbooleanArray jboolean<br>GetByteArrayElements jbyteArray jbyte<br>GetCharArrayElements jcharArray jchar<br>GetShortArrayElements jshortArray jshort<br>GetIntArrayElements jintArray jint<br>GetLongArrayElements jlongArray jlong<br>GetFloatArrayElements jfloatArray jfloat<br>GetDoubleArrayElements jdoubleArray jdouble<br>JNI数组存取函数<br>当你对数组的存取完成后，要确保调用相应的ReleaseXXXArrayElements函数，参数是对应Java数组和GetXXXArrayElements返回的指针。如果必要的话，这个释放函数会复制你做的任何变化（这样它们就反射到java数组），然后释放所有相关的资源。<br>为了使用java对象的数组，你必须使用GetObjectArrayElement函数和SetObjectArrayElement函数，分别去get，set数组的元素。GetArrayLength函数会返回数组的长度。<br>使用对象</p><p>JNI提供的另外一个功能是在本地代码中使用Java对象。通过使用合适的JNI函数，你可以创建Java对象，get、set 静态(static)和实例（instance）的域，调用静态(static)和实例（instance）函数。JNI通过ID识别域和方法，一个域或方法的ID是任何处理域和方法的函数的必须参数。<br>表C列出了用以得到静态(static)和实例（instance）的域与方法的JNI函数。每个函数接受（作为参数）域或方法的类，它们的名称，符号和它们对应返回的jfieldID或jmethodID。<br>表C<br>函数 描述<br>GetFieldID 得到一个实例的域的ID<br>GetStaticFieldID 得到一个静态的域的ID<br>GetMethodID 得到一个实例的方法的ID<br>GetStaticMethodID 得到一个静态方法的ID<br>※域和方法的函数<br>如果你有了一个类的实例，它就可以通过方法GetObjectClass得到，或者如果你没有这个类的实例，可以通过FindClass得到。符号是从域的类型或者方法的参数，返回值得到字符串，如表D所示。<br>表D<br>Java 类型 符号<br>boolean Z<br>byte B<br>char C<br>short S<br>int I<br>long L<br>float F<br>double D<br>void V<br>objects对象 Lfully-qualified-class-name;L类名<br>Arrays数组 [array-type [数组类型<br>methods方法 (argument-types)return-type(参数类型)返回类型<br>※确定域和方法的符号</p><p>下面我们来看看，如果通过使用数组和对象，从C++中的获取到Java中的DiskInfo 类对象，并返回一个DiskInfo数组:<br>//返回一个结构数组，返回一个硬盘信息的结构数组<br>JNIEXPORT jobjectArray JNICALL Java_com_sundy_jnidemo_ChangeMethodFromJni_getStructArray<br>(JNIEnv *env, jobject _obj)<br>{<br>//申明一个object数组<br>jobjectArray args = 0;</p><pre><code>//数组大小
 jsize        len = 5;
 
 //获取object所属类,一般为ava/lang/Object就可以了
@@ -203,47 +191,8 @@ for(int  i=0; i &lt; len; i++ )
 }
 //返回object数组
 return args;
-</code></pre><p> }</p>
-<p>全部的C/C++方法实现代码如下:<br>/<em>
-</em></p>
-<ul>
-<li>一缕阳光(sundy)版权所有，保留所有权利。<br>*/<br>/**</li>
-<li></li>
-<li>TODO Jni 中一个从Java到C/C++参数传递测试类<br>*</li>
-<li>@author 刘正伟(sundy)</li>
-<li>@see <a href="http://www.cnweblog.com/sundy" target="_blank" rel="noopener">http://www.cnweblog.com/sundy</a></li>
-<li>@see mailto:<a href="mailto:sundy26@126.com" target="_blank" rel="noopener">sundy26@126.com</a></li>
-<li>@version 1.0</li>
-<li>@since 2005-4-30</li>
-<li></li>
-<li>修改记录：</li>
-<li></li>
-<li>日期              修改人                 描述</li>
-<li><hr>
-<em>
-</em><br><em>
-</em>/<br>// JniManage.cpp : 定义 DLL 应用程序的入口点。<br>//<br>package com.sundy.jnidemo;<br>#include “stdafx.h”</li>
-</ul>
-<p>#include &lt;stdio.h&gt;</p>
-<p>#include &lt;math.h&gt;</p>
-<p>#include “jni.h”</p>
-<p>#include “jni_md.h”</p>
-<p>#include “./head/Base.h”</p>
-<p>#include “head/wmi.h”</p>
-<p>#include “head/com_sundy_jnidemo_ChangeMethodFromJni.h” //通过javah –jni javactransfer 生成</p>
-<p>#include &lt;stdio.h&gt;</p>
-<p>#include “stdlib.h”</p>
-<p>#include “string.h”</p>
-<p>#pragma comment (lib,”BaseInfo.lib”)</p>
-<p>#pragma comment (lib,”jvm.lib”)<br>//硬盘信息<br>struct  {<br>    char name[256];<br>    int serial;<br>}DiskInfo;<br>/<em>BOOL APIENTRY DllMain( HANDLE hModule,<br>                       DWORD  ul_reason_for_call,<br>                       LPVOID lpReserved<br>                     )<br>{<br>    LPTSTR  strName = new CHAR[256] ;<br>    (</em>GetHostName)(strName);<br>    printf(“%s\n”,strName);<br>    delete [] strName;</p>
-<pre><code>return TRUE;
-</code></pre><p>}<em>/<br>//将jstring类型转换成windows类型<br>char</em> jstringToWindows( JNIEnv <em>env, jstring jstr );<br>//将windows类型转换成jstring类型<br>jstring WindowsTojstring( JNIEnv</em> env, char* str );</p>
-<p>//主函数<br>BOOL WINAPI DllMain(HANDLE hHandle, DWORD dwReason, LPVOID lpReserved)<br>{<br>    return TRUE;<br>}<br>//输入常用的数值类型 Boolean,Byte,Char,Short,Int,Float,Double<br>JNIEXPORT void JNICALL Java_com_sundy_jnidemo_ChangeMethodFromJni_displayParms<br>(JNIEnv <em>env, jobject obj, jstring s, jint i, jboolean b)<br>{<br>    const char</em> szStr = (env)-&gt;GetStringUTFChars(s, 0 );<br>    printf( “String = [%s]\n”, szStr );<br>    printf( “int = %d\n”, i );<br>    printf( “boolean = %s\n”, (b==JNI_TRUE ? “true” : “false”) );<br>    (env)-&gt;ReleaseStringUTFChars(s, szStr );<br>}</p>
-<p>//调用一个静态方法,只有一个简单类型输出<br>JNIEXPORT jint JNICALL Java_com_sundy_jnidemo_ChangeMethodFromJni_add<br>(JNIEnv *env, jobject, jint a, jint b)<br>{<br>    int rtn = (int)(a + b);<br>    return (jint)rtn;<br>}</p>
-<p>////输入一个数组,这里输入的是一个Boolean类型的数组<br>JNIEXPORT void JNICALL Java_com_sundy_jnidemo_ChangeMethodFromJni_setArray<br>(JNIEnv <em>env, jobject, jbooleanArray ba)<br>{<br>    jboolean</em> pba = (env)-&gt;GetBooleanArrayElements(ba, 0 );<br>    jsize len = (env)-&gt;GetArrayLength(ba);<br>    int i=0;<br>    // change even array elements<br>    for( i=0; i &lt; len; i+=2 )<br>    {<br>        pba[i] = JNI_FALSE;<br>        printf( “boolean = %s\n”, (pba[i]==JNI_TRUE ? “true” : “false”) );<br>    }<br>    (env)-&gt;ReleaseBooleanArrayElements(ba, pba, 0 );<br>}</p>
-<p>////返回一个字符串数组<br>JNIEXPORT jobjectArray JNICALL Java_com_sundy_jnidemo_ChangeMethodFromJni_getStringArray<br>(JNIEnv <em>env, jobject)<br>{<br>    jstring      str;<br>    jobjectArray args = 0;<br>    jsize        len = 5;<br>    char</em>        sa[] = { “Hello,”, “world!”, “JNI”, “is”, “fun” };<br>    int          i=0;<br>    args = (env)-&gt;NewObjectArray(len,(env)-&gt;FindClass(“java/lang/String”),0);<br>    for( i=0; i &lt; len; i++ )<br>    {<br>        str = (env)-&gt;NewStringUTF(sa[i] );<br>        (env)-&gt;SetObjectArrayElement(args, i, str);<br>    }<br>    return args;<br>}</p>
-<p>//返回一个结构,这里返回一个硬盘信息的简单结构类型<br>JNIEXPORT jobject JNICALL Java_com_sundy_jnidemo_ChangeMethodFromJni_getStruct<br>(JNIEnv <em>env, jobject obj)<br>{<br>    /</em> 下面为获取到Java中对应的实例类中的变量*/</p>
-<pre><code>//获取Java中的实例类
+</code></pre><p>}</p><p>全部的C/C++方法实现代码如下:<br>/<em></em></p><ul><li>一缕阳光(sundy)版权所有，保留所有权利。<br>*/<br>/**</li><li></li><li>TODO Jni 中一个从Java到C/C++参数传递测试类<br>*</li><li>@author 刘正伟(sundy)</li><li>@see <a href="http://www.cnweblog.com/sundy" target="_blank" rel="noopener">http://www.cnweblog.com/sundy</a></li><li>@see mailto:<a href="mailto:sundy26@126.com" target="_blank" rel="noopener">sundy26@126.com</a></li><li>@version 1.0</li><li>@since 2005-4-30</li><li></li><li>修改记录：</li><li></li><li>日期 修改人 描述</li><li><hr><em></em><br><em></em>/<br>// JniManage.cpp : 定义 DLL 应用程序的入口点。<br>//<br>package com.sundy.jnidemo;<br>#include “stdafx.h”</li></ul><p>#include &lt;stdio.h&gt;</p><p>#include &lt;math.h&gt;</p><p>#include “jni.h”</p><p>#include “jni_md.h”</p><p>#include “./head/Base.h”</p><p>#include “head/wmi.h”</p><p>#include “head/com_sundy_jnidemo_ChangeMethodFromJni.h” //通过javah –jni javactransfer 生成</p><p>#include &lt;stdio.h&gt;</p><p>#include “stdlib.h”</p><p>#include “string.h”</p><p>#pragma comment (lib,”BaseInfo.lib”)</p><p>#pragma comment (lib,”jvm.lib”)<br>//硬盘信息<br>struct {<br>char name[256];<br>int serial;<br>}DiskInfo;<br>/<em>BOOL APIENTRY DllMain( HANDLE hModule,<br>DWORD ul_reason_for_call,<br>LPVOID lpReserved<br>)<br>{<br>LPTSTR strName = new CHAR[256] ;<br>(</em>GetHostName)(strName);<br>printf(“%s\n”,strName);<br>delete [] strName;</p><pre><code>return TRUE;
+</code></pre><p>}<em>/<br>//将jstring类型转换成windows类型<br>char</em> jstringToWindows( JNIEnv <em>env, jstring jstr );<br>//将windows类型转换成jstring类型<br>jstring WindowsTojstring( JNIEnv</em> env, char* str );</p><p>//主函数<br>BOOL WINAPI DllMain(HANDLE hHandle, DWORD dwReason, LPVOID lpReserved)<br>{<br>return TRUE;<br>}<br>//输入常用的数值类型 Boolean,Byte,Char,Short,Int,Float,Double<br>JNIEXPORT void JNICALL Java_com_sundy_jnidemo_ChangeMethodFromJni_displayParms<br>(JNIEnv <em>env, jobject obj, jstring s, jint i, jboolean b)<br>{<br>const char</em> szStr = (env)-&gt;GetStringUTFChars(s, 0 );<br>printf( “String = [%s]\n”, szStr );<br>printf( “int = %d\n”, i );<br>printf( “boolean = %s\n”, (b==JNI_TRUE ? “true” : “false”) );<br>(env)-&gt;ReleaseStringUTFChars(s, szStr );<br>}</p><p>//调用一个静态方法,只有一个简单类型输出<br>JNIEXPORT jint JNICALL Java_com_sundy_jnidemo_ChangeMethodFromJni_add<br>(JNIEnv *env, jobject, jint a, jint b)<br>{<br>int rtn = (int)(a + b);<br>return (jint)rtn;<br>}</p><p>////输入一个数组,这里输入的是一个Boolean类型的数组<br>JNIEXPORT void JNICALL Java_com_sundy_jnidemo_ChangeMethodFromJni_setArray<br>(JNIEnv <em>env, jobject, jbooleanArray ba)<br>{<br>jboolean</em> pba = (env)-&gt;GetBooleanArrayElements(ba, 0 );<br>jsize len = (env)-&gt;GetArrayLength(ba);<br>int i=0;<br>// change even array elements<br>for( i=0; i &lt; len; i+=2 )<br>{<br>pba[i] = JNI_FALSE;<br>printf( “boolean = %s\n”, (pba[i]==JNI_TRUE ? “true” : “false”) );<br>}<br>(env)-&gt;ReleaseBooleanArrayElements(ba, pba, 0 );<br>}</p><p>////返回一个字符串数组<br>JNIEXPORT jobjectArray JNICALL Java_com_sundy_jnidemo_ChangeMethodFromJni_getStringArray<br>(JNIEnv <em>env, jobject)<br>{<br>jstring str;<br>jobjectArray args = 0;<br>jsize len = 5;<br>char</em> sa[] = { “Hello,”, “world!”, “JNI”, “is”, “fun” };<br>int i=0;<br>args = (env)-&gt;NewObjectArray(len,(env)-&gt;FindClass(“java/lang/String”),0);<br>for( i=0; i &lt; len; i++ )<br>{<br>str = (env)-&gt;NewStringUTF(sa[i] );<br>(env)-&gt;SetObjectArrayElement(args, i, str);<br>}<br>return args;<br>}</p><p>//返回一个结构,这里返回一个硬盘信息的简单结构类型<br>JNIEXPORT jobject JNICALL Java_com_sundy_jnidemo_ChangeMethodFromJni_getStruct<br>(JNIEnv <em>env, jobject obj)<br>{<br>/</em> 下面为获取到Java中对应的实例类中的变量*/</p><pre><code>//获取Java中的实例类
 jclass objectClass = (env)-&gt;FindClass(&quot;com/sundy/jnidemo/DiskInfo&quot;);
 
 //获取类中每一个变量的定义
@@ -258,9 +207,7 @@ jfieldID ival = (env)-&gt;GetFieldID(objectClass,&quot;serial&quot;,&quot;I&quot
 (env)-&gt;SetShortField(obj,ival,10);
 
 return obj;
-</code></pre><p>}</p>
-<p>//返回一个结构数组，返回一个硬盘信息的结构数组<br>JNIEXPORT jobjectArray JNICALL Java_com_sundy_jnidemo_ChangeMethodFromJni_getStructArray<br>(JNIEnv *env, jobject _obj)<br>{<br>    //申明一个object数组<br>    jobjectArray args = 0;</p>
-<pre><code>//数组大小
+</code></pre><p>}</p><p>//返回一个结构数组，返回一个硬盘信息的结构数组<br>JNIEXPORT jobjectArray JNICALL Java_com_sundy_jnidemo_ChangeMethodFromJni_getStructArray<br>(JNIEnv *env, jobject _obj)<br>{<br>//申明一个object数组<br>jobjectArray args = 0;</p><pre><code>//数组大小
 jsize        len = 5;
 
 //获取object所属类,一般为ava/lang/Object就可以了
@@ -294,10 +241,7 @@ for(int  i=0; i &lt; len; i++ )
 }
 //返回object数组
 return args;
-</code></pre><p> }</p>
-<p>//将jstring类型转换成windows类型<br>char<em> jstringToWindows( JNIEnv  </em>env, jstring jstr )<br>{<br>    int length = (env)-&gt;GetStringLength(jstr );<br>    const jchar<em> jcstr = (env)-&gt;GetStringChars(jstr, 0 );<br>    char</em> rtn = (char<em>)malloc( length</em>2+1 );<br>    int size = 0;<br>    size = WideCharToMultiByte( CP_ACP, 0, (LPCWSTR)jcstr, length, rtn,(length<em>2+1), NULL, NULL );<br>    if( size &lt;= 0 )<br>        return NULL;<br>    (env)-&gt;ReleaseStringChars(jstr, jcstr );<br>    rtn[size] = 0;<br>    return rtn;<br>}<br>//将windows类型转换成jstring类型<br>jstring WindowsTojstring( JNIEnv</em> env, char<em> str )<br>{<br>    jstring rtn = 0;<br>    int slen = strlen(str);<br>    unsigned short </em> buffer = 0;<br>    if( slen == 0 )<br>        rtn = (env)-&gt;NewStringUTF(str );<br>    else<br>    {<br>        int length = MultiByteToWideChar( CP_ACP, 0, (LPCSTR)str, slen, NULL, 0 );<br>        buffer = (unsigned short <em>)malloc( length</em>2 + 1 );<br>        if( MultiByteToWideChar( CP_ACP, 0, (LPCSTR)str, slen, (LPWSTR)buffer, length ) &gt;0 )<br>            rtn = (env)-&gt;NewString(  (jchar*)buffer, length );<br>    }<br>    if( buffer )<br>        free( buffer );<br>    return rtn;<br>}</p>
-<p>Java 测试native代码<br>这没有什么多说的，看代码吧<br>//主测试程序<br>    public static void main(String[] args) {<br>        ChangeMethodFromJni changeJni = new ChangeMethodFromJni();</p>
-<pre><code>    //输入常用的数值类型(string int boolean)
+</code></pre><p>}</p><p>//将jstring类型转换成windows类型<br>char<em> jstringToWindows( JNIEnv </em>env, jstring jstr )<br>{<br>int length = (env)-&gt;GetStringLength(jstr );<br>const jchar<em> jcstr = (env)-&gt;GetStringChars(jstr, 0 );<br>char</em> rtn = (char<em>)malloc( length</em>2+1 );<br>int size = 0;<br>size = WideCharToMultiByte( CP_ACP, 0, (LPCWSTR)jcstr, length, rtn,(length<em>2+1), NULL, NULL );<br>if( size &lt;= 0 )<br>return NULL;<br>(env)-&gt;ReleaseStringChars(jstr, jcstr );<br>rtn[size] = 0;<br>return rtn;<br>}<br>//将windows类型转换成jstring类型<br>jstring WindowsTojstring( JNIEnv</em> env, char<em> str )<br>{<br>jstring rtn = 0;<br>int slen = strlen(str);<br>unsigned short </em>buffer = 0;<br>if( slen == 0 )<br>rtn = (env)-&gt;NewStringUTF(str );<br>else<br>{<br>int length = MultiByteToWideChar( CP_ACP, 0, (LPCSTR)str, slen, NULL, 0 );<br>buffer = (unsigned short <em>)malloc( length</em>2 + 1 );<br>if( MultiByteToWideChar( CP_ACP, 0, (LPCSTR)str, slen, (LPWSTR)buffer, length ) &gt;0 )<br>rtn = (env)-&gt;NewString( (jchar*)buffer, length );<br>}<br>if( buffer )<br>free( buffer );<br>return rtn;<br>}</p><p>Java 测试native代码<br>这没有什么多说的，看代码吧<br>//主测试程序<br>public static void main(String[] args) {<br>ChangeMethodFromJni changeJni = new ChangeMethodFromJni();</p><pre><code>    //输入常用的数值类型(string int boolean)
     System.out
             .println(&quot;------------------输入常用的数值类型(string int boolean)-----------&quot;);
     changeJni.displayParms(&quot;Hello World!&quot;, 100, true);

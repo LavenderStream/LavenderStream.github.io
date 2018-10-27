@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="昨天看了篇博客，讲的是Android面向组件化编程。深受启发，按照博客上的思路，自己实现了一下。  1、gradle.config：   配置文件 gradle的配置文件，版本的配置统一写在这个文件下2、Libraries ：          项目的基础架构、通用的资源、三方库等3、Components ：  组件类，所有的组件依赖于这个模块4、Framework ：     将所有的组件包装，">
+    <meta name="description" content="昨天看了篇博客，讲的是Android面向组件化编程。深受启发，按照博客上的思路，自己实现了一下。1、gradle.config： 配置文件 gradle的配置文件，版本的配置统一写在这个文件下2、Libraries ： 项目的基础架构、通用的资源、三方库等3、Components ： 组件类，所有的组件依赖于这个模块4、Framework ： 将所有的组件包装，主项目只以来与这个模块，使用andr">
 <meta name="keywords" content="android javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android -- Android 组件化编程">
 <meta property="og:url" content="https://lavenderstream.github.io/2017/10/11/Android-Android-组件化编程/index.html">
 <meta property="og:site_name" content="Tiny hexo">
-<meta property="og:description" content="昨天看了篇博客，讲的是Android面向组件化编程。深受启发，按照博客上的思路，自己实现了一下。  1、gradle.config：   配置文件 gradle的配置文件，版本的配置统一写在这个文件下2、Libraries ：          项目的基础架构、通用的资源、三方库等3、Components ：  组件类，所有的组件依赖于这个模块4、Framework ：     将所有的组件包装，">
+<meta property="og:description" content="昨天看了篇博客，讲的是Android面向组件化编程。深受启发，按照博客上的思路，自己实现了一下。1、gradle.config： 配置文件 gradle的配置文件，版本的配置统一写在这个文件下2、Libraries ： 项目的基础架构、通用的资源、三方库等3、Components ： 组件类，所有的组件依赖于这个模块4、Framework ： 将所有的组件包装，主项目只以来与这个模块，使用andr">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-02cb3da698109d4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-355f02e5f1628b61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -23,7 +23,7 @@
 <meta property="og:updated_time" content="2018-10-27T03:14:08.706Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android -- Android 组件化编程">
-<meta name="twitter:description" content="昨天看了篇博客，讲的是Android面向组件化编程。深受启发，按照博客上的思路，自己实现了一下。  1、gradle.config：   配置文件 gradle的配置文件，版本的配置统一写在这个文件下2、Libraries ：          项目的基础架构、通用的资源、三方库等3、Components ：  组件类，所有的组件依赖于这个模块4、Framework ：     将所有的组件包装，">
+<meta name="twitter:description" content="昨天看了篇博客，讲的是Android面向组件化编程。深受启发，按照博客上的思路，自己实现了一下。1、gradle.config： 配置文件 gradle的配置文件，版本的配置统一写在这个文件下2、Libraries ： 项目的基础架构、通用的资源、三方库等3、Components ： 组件类，所有的组件依赖于这个模块4、Framework ： 将所有的组件包装，主项目只以来与这个模块，使用andr">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1285832-02cb3da698109d4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
     
@@ -146,17 +146,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>昨天看了篇博客，讲的是Android面向组件化编程。深受启发，按照博客上的思路，自己实现了一下。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-02cb3da698109d4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="流程"></p>
-<p>1、gradle.config：   配置文件 gradle的配置文件，版本的配置统一写在这个文件下<br>2、Libraries ：          项目的基础架构、通用的资源、三方库等<br>3、Components ：  组件类，所有的组件依赖于这个模块<br>4、Framework ：     将所有的组件包装，主项目只以来与这个模块，使用android studio 3.0 的gradle依赖，让Components  模块去暴露api接口<br>5、app ：                 应用主项目</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-355f02e5f1628b61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>ComponentManager ： 组件的管理类，所以的组件通过这个类来管理<br>IApp ： 所有的都要实现这个接口，主要把组件添加到上面管理类中<br>IComponent ： 组件中需要在这个模块中注册，并且组件实现这个接口，提供给主程序暴露的方法，主程序通过拿到这个接口和组件之间进行通讯</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-f07595d65db72ec9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>已登入组件为例：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-c168ee01642907d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>App 实现 IApp接口， 将接口和其实现注册进管理类</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-fa9535c828754109.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>实现ILogon 接口</p>
-<p>总结：ComponentManager 用用于管理组件的类，逐渐的持有者需要把组件注册进去，而组件需要吧对依赖者暴露的方法注册进去</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-9fec7653dca6fd8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>用使用我们管理类，拿到组件进行调用</p>
-
+    <p>昨天看了篇博客，讲的是Android面向组件化编程。深受启发，按照博客上的思路，自己实现了一下。</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-02cb3da698109d4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="流程"></p><p>1、gradle.config： 配置文件 gradle的配置文件，版本的配置统一写在这个文件下<br>2、Libraries ： 项目的基础架构、通用的资源、三方库等<br>3、Components ： 组件类，所有的组件依赖于这个模块<br>4、Framework ： 将所有的组件包装，主项目只以来与这个模块，使用android studio 3.0 的gradle依赖，让Components 模块去暴露api接口<br>5、app ： 应用主项目</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-355f02e5f1628b61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>ComponentManager ： 组件的管理类，所以的组件通过这个类来管理<br>IApp ： 所有的都要实现这个接口，主要把组件添加到上面管理类中<br>IComponent ： 组件中需要在这个模块中注册，并且组件实现这个接口，提供给主程序暴露的方法，主程序通过拿到这个接口和组件之间进行通讯</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-f07595d65db72ec9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>已登入组件为例：</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-c168ee01642907d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p><p>App 实现 IApp接口， 将接口和其实现注册进管理类</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-fa9535c828754109.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>实现ILogon 接口</p><p>总结：ComponentManager 用用于管理组件的类，逐渐的持有者需要把组件注册进去，而组件需要吧对依赖者暴露的方法注册进去</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-9fec7653dca6fd8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>用使用我们管理类，拿到组件进行调用</p>
   </div>
 </article>
 

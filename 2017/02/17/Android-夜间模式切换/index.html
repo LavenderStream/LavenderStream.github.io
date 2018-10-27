@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="黑夜在项目中的黑夜模式是这样实现的  在整个程序中有一个static的list，存放着所有存活的activity或这fragment。 放黑色模式的按钮发生变化时，存sp，遍历这个list， 向实现这个接口的所有视图，通知黑夜模式有变 这也页面会根据当前sp中的值重新设置color 按照这种方式下去， 我们的代码是这样的： 每个activity或者fragment实现一个接口 在这个接口中，把所有">
+    <meta name="description" content="黑夜在项目中的黑夜模式是这样实现的在整个程序中有一个static的list，存放着所有存活的activity或这fragment。放黑色模式的按钮发生变化时，存sp，遍历这个list， 向实现这个接口的所有视图，通知黑夜模式有变这也页面会根据当前sp中的值重新设置color按照这种方式下去， 我们的代码是这样的：每个activity或者fragment实现一个接口在这个接口中，把所有涉及到颜色变换">
 <meta name="keywords" content="top">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android -- 夜间模式切换">
 <meta property="og:url" content="https://lavenderstream.github.io/2017/02/17/Android-夜间模式切换/index.html">
 <meta property="og:site_name" content="Tiny hexo">
-<meta property="og:description" content="黑夜在项目中的黑夜模式是这样实现的  在整个程序中有一个static的list，存放着所有存活的activity或这fragment。 放黑色模式的按钮发生变化时，存sp，遍历这个list， 向实现这个接口的所有视图，通知黑夜模式有变 这也页面会根据当前sp中的值重新设置color 按照这种方式下去， 我们的代码是这样的： 每个activity或者fragment实现一个接口 在这个接口中，把所有">
+<meta property="og:description" content="黑夜在项目中的黑夜模式是这样实现的在整个程序中有一个static的list，存放着所有存活的activity或这fragment。放黑色模式的按钮发生变化时，存sp，遍历这个list， 向实现这个接口的所有视图，通知黑夜模式有变这也页面会根据当前sp中的值重新设置color按照这种方式下去， 我们的代码是这样的：每个activity或者fragment实现一个接口在这个接口中，把所有涉及到颜色变换">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-c13282c8811abaa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-67a3b75ba810cfd3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -26,7 +26,7 @@
 <meta property="og:updated_time" content="2018-10-27T03:52:20.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android -- 夜间模式切换">
-<meta name="twitter:description" content="黑夜在项目中的黑夜模式是这样实现的  在整个程序中有一个static的list，存放着所有存活的activity或这fragment。 放黑色模式的按钮发生变化时，存sp，遍历这个list， 向实现这个接口的所有视图，通知黑夜模式有变 这也页面会根据当前sp中的值重新设置color 按照这种方式下去， 我们的代码是这样的： 每个activity或者fragment实现一个接口 在这个接口中，把所有">
+<meta name="twitter:description" content="黑夜在项目中的黑夜模式是这样实现的在整个程序中有一个static的list，存放着所有存活的activity或这fragment。放黑色模式的按钮发生变化时，存sp，遍历这个list， 向实现这个接口的所有视图，通知黑夜模式有变这也页面会根据当前sp中的值重新设置color按照这种方式下去， 我们的代码是这样的：每个activity或者fragment实现一个接口在这个接口中，把所有涉及到颜色变换">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1285832-c13282c8811abaa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
     
@@ -156,53 +156,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h3 id="黑夜"><a href="#黑夜" class="headerlink" title="黑夜"></a>黑夜</h3><p>在项目中的黑夜模式是这样实现的</p>
-<ul>
-<li>在整个程序中有一个static的list，存放着所有存活的activity或这fragment。</li>
-<li>放黑色模式的按钮发生变化时，存sp，遍历这个list， 向实现这个接口的所有视图，通知黑夜模式有变</li>
-<li>这也页面会根据当前sp中的值重新设置color</li>
-<li>按照这种方式下去， 我们的代码是这样的：<ul>
-<li>每个activity或者fragment实现一个接口</li>
-<li>在这个接口中，把所有涉及到颜色变换的组件，分别设置颜色</li>
-<li>颜色的来源是从sp中读取一个字段，然后根据黑天或者白天， 去加载一下color或者drawable</li>
-<li>项目中有一段java文件， 存放了所有的颜色值，大概会有400多个静态的全局变量，标记着颜色各种颜色和drawable，就像一个R文件一样</li>
-</ul>
-</li>
-</ul>
-<p>带来的几个问题是</p>
-<ul>
-<li>不得不要在整个布局创建的时候先给定一个颜色，通常是默认的白天。当设置成黑夜模式的时候实际上都是先设置成白天， 然后再把布局重新设置成黑天的状态，有种脱裤子放屁的感觉了</li>
-<li>所有的颜色文件要写在colors.xml中一份，为了是能在xml中设置，同时我在java文件中也要同时生命所有的黑夜和白天的属性，一共400多个静态的变量</li>
-<li>每次黑夜和白天的交替，我要把所有涉及到的组件都更新一次，若代码复杂的话，基本GG了。</li>
-</ul>
-<h3 id="凌晨"><a href="#凌晨" class="headerlink" title="凌晨"></a>凌晨</h3><p>项目最小api支持9，4.0的夜间模式是用不上了，不然的话写一个color和一个color-night， 接着把已经存在的界面设置一下， 就可以去喝茶了。</p>
-<p>实现是没那么多时间去把所有的view组件重写一边，就为了实现黑夜和白天的效果也没必要。</p>
-<p>想了想，要是我能知道现在view的属性， 然后我在找到这个属性在黑天的时候是什么样子的，在设置一下不就好了。所以就顺着这个思路一直走下去。</p>
-<h3 id="白天"><a href="#白天" class="headerlink" title="白天"></a>白天</h3><p>大致的思路就是，我先要知道这个view的textcolor或者background再或者drawable什么的，改变颜色不就是他们这几个属性么？我想直接找到view中的这些属性，但是试了试没有办法。没办法通过人r.id去找到对应的名字。但是，我们却能通过名字找到对应的id</p>
-<p>ok， 那我就用view 的tag 存一下这个名字吧，但是还是不能解决两次设置属性，还是就是， 我万一要用tag可怎么办，总不能不用吧。那databinding试试吧</p>
-<hr>
-<p>手动分割线，下面就是思路</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-c13282c8811abaa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xml"></p>
-<p>使用binding，就像写了自定义view的attrs一样，这是一个命名空间，写了两个属性，顾名思义了。传入的就是在xml文件中写的color值。这里传的只是代表白天时的key，我们要传个字符串，就要<code>&quot; &#39;&#39; &quot;</code></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-67a3b75ba810cfd3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="color.xml"></p>
-<p>以上就是颜色的值了，写到了一个xml文件中了（ps：这里我更喜欢 night_，因为我有alt键）</p>
-<p>用了databinding去加载布局，这里就涉及到了三个方法，当我用databinding去加载布局的时候就会自动的调用对应的方法</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-2e9347daf746dec8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="binding"></p>
-<p>当然，无论如何，都离不开收集一下所有存活的view，oncreate的时候填进去，destory去掉，这个别忘记就行了， 建议观察者吧。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-33458e494cc05ce3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="view set"></p>
-<p>当黑夜模式发生更改时，去递归更改root下的所有子view的所有子view的所有子view的所有子view……</p>
-<p>但是真对于像recyclerview这个大哥，就不递归了，怕子view太多，根本停不下来（当然还是各种要判断的view），这里只是实现了背景和字体颜色，drawable都差不多，demo上就不写了</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-c8954e10501cb95b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="change"></p>
-<p>最后一个就是根据属性的名字得到资源的方法了</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-b9cec024ef184d61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="get resource id"></p>
-<p>基本实现变换的代码就这么多了，下面是正经代码和分割线</p>
-<hr>
-<p>在开始和结束的时候，会注册和取消，一般放在base中就行了<br>在切换的时候会调用下一<code>setNight()</code>方法，就是一个for循环，去一一调用<code>onChange()</code> ，在<code>onChange()</code>中去改变属性，就是上面的那个递归，这里传rootview，别太深起到作用就好</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-263c48d6fe1a9cfe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MainAvtivity"></p>
-<p>如果是recyclerview的这种情况，在<code>onCreateViewHolder</code>使用binding哦，不然那三个静态方法是没用的<br><img src="http://upload-images.jianshu.io/upload_images/1285832-7820d1cbb87255f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="recyclerview"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-5ae5fc0b690e26f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="onCreateViewHolder"></p>
-<p><code>onChange()</code>方法中不但设置了change并且notify了， 因为在最开始，我吧recyclerview提出了整个递归，为了不让一下更新太多的view，recyclerview的显示以item为单位吧，在<code>onBindViewHolder()</code>中，在重新设置布局，这个rootview就是item的root。</p>
-<h5 id="gif图怎么做？"><a href="#gif图怎么做？" class="headerlink" title="gif图怎么做？"></a>gif图怎么做？</h5>
+    <h3 id="黑夜"><a href="#黑夜" class="headerlink" title="黑夜"></a>黑夜</h3><p>在项目中的黑夜模式是这样实现的</p><ul><li>在整个程序中有一个static的list，存放着所有存活的activity或这fragment。</li><li>放黑色模式的按钮发生变化时，存sp，遍历这个list， 向实现这个接口的所有视图，通知黑夜模式有变</li><li>这也页面会根据当前sp中的值重新设置color</li><li>按照这种方式下去， 我们的代码是这样的：<ul><li>每个activity或者fragment实现一个接口</li><li>在这个接口中，把所有涉及到颜色变换的组件，分别设置颜色</li><li>颜色的来源是从sp中读取一个字段，然后根据黑天或者白天， 去加载一下color或者drawable</li><li>项目中有一段java文件， 存放了所有的颜色值，大概会有400多个静态的全局变量，标记着颜色各种颜色和drawable，就像一个R文件一样</li></ul></li></ul><p>带来的几个问题是</p><ul><li>不得不要在整个布局创建的时候先给定一个颜色，通常是默认的白天。当设置成黑夜模式的时候实际上都是先设置成白天， 然后再把布局重新设置成黑天的状态，有种脱裤子放屁的感觉了</li><li>所有的颜色文件要写在colors.xml中一份，为了是能在xml中设置，同时我在java文件中也要同时生命所有的黑夜和白天的属性，一共400多个静态的变量</li><li>每次黑夜和白天的交替，我要把所有涉及到的组件都更新一次，若代码复杂的话，基本GG了。</li></ul><h3 id="凌晨"><a href="#凌晨" class="headerlink" title="凌晨"></a>凌晨</h3><p>项目最小api支持9，4.0的夜间模式是用不上了，不然的话写一个color和一个color-night， 接着把已经存在的界面设置一下， 就可以去喝茶了。</p><p>实现是没那么多时间去把所有的view组件重写一边，就为了实现黑夜和白天的效果也没必要。</p><p>想了想，要是我能知道现在view的属性， 然后我在找到这个属性在黑天的时候是什么样子的，在设置一下不就好了。所以就顺着这个思路一直走下去。</p><h3 id="白天"><a href="#白天" class="headerlink" title="白天"></a>白天</h3><p>大致的思路就是，我先要知道这个view的textcolor或者background再或者drawable什么的，改变颜色不就是他们这几个属性么？我想直接找到view中的这些属性，但是试了试没有办法。没办法通过人r.id去找到对应的名字。但是，我们却能通过名字找到对应的id</p><p>ok， 那我就用view 的tag 存一下这个名字吧，但是还是不能解决两次设置属性，还是就是， 我万一要用tag可怎么办，总不能不用吧。那databinding试试吧</p><hr><p>手动分割线，下面就是思路</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-c13282c8811abaa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xml"></p><p>使用binding，就像写了自定义view的attrs一样，这是一个命名空间，写了两个属性，顾名思义了。传入的就是在xml文件中写的color值。这里传的只是代表白天时的key，我们要传个字符串，就要<code>&quot; &#39;&#39; &quot;</code></p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-67a3b75ba810cfd3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="color.xml"></p><p>以上就是颜色的值了，写到了一个xml文件中了（ps：这里我更喜欢 night_，因为我有alt键）</p><p>用了databinding去加载布局，这里就涉及到了三个方法，当我用databinding去加载布局的时候就会自动的调用对应的方法</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-2e9347daf746dec8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="binding"></p><p>当然，无论如何，都离不开收集一下所有存活的view，oncreate的时候填进去，destory去掉，这个别忘记就行了， 建议观察者吧。</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-33458e494cc05ce3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="view set"></p><p>当黑夜模式发生更改时，去递归更改root下的所有子view的所有子view的所有子view的所有子view……</p><p>但是真对于像recyclerview这个大哥，就不递归了，怕子view太多，根本停不下来（当然还是各种要判断的view），这里只是实现了背景和字体颜色，drawable都差不多，demo上就不写了</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-c8954e10501cb95b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="change"></p><p>最后一个就是根据属性的名字得到资源的方法了</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-b9cec024ef184d61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="get resource id"></p><p>基本实现变换的代码就这么多了，下面是正经代码和分割线</p><hr><p>在开始和结束的时候，会注册和取消，一般放在base中就行了<br>在切换的时候会调用下一<code>setNight()</code>方法，就是一个for循环，去一一调用<code>onChange()</code> ，在<code>onChange()</code>中去改变属性，就是上面的那个递归，这里传rootview，别太深起到作用就好</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-263c48d6fe1a9cfe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MainAvtivity"></p><p>如果是recyclerview的这种情况，在<code>onCreateViewHolder</code>使用binding哦，不然那三个静态方法是没用的<br><img src="http://upload-images.jianshu.io/upload_images/1285832-7820d1cbb87255f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="recyclerview"></p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-5ae5fc0b690e26f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="onCreateViewHolder"></p><p><code>onChange()</code>方法中不但设置了change并且notify了， 因为在最开始，我吧recyclerview提出了整个递归，为了不让一下更新太多的view，recyclerview的显示以item为单位吧，在<code>onBindViewHolder()</code>中，在重新设置布局，这个rootview就是item的root。</p><h5 id="gif图怎么做？"><a href="#gif图怎么做？" class="headerlink" title="gif图怎么做？"></a>gif图怎么做？</h5>
   </div>
 </article>
 

@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="1、debounce去抖动、减少不必要的处理当所发射数据的时间差小于设定值，debounce滤掉前N-1个节点，也就是说会留下最后一个在做响应式、动态搜索时，可用于减少不必要的网络请求次数 2、throttleFirst防抖动获取这段时间内的第一个值，可用于按钮的防抖动，这与debounce不同，debounce是取最后一个，throttleFirst是取第一个 #3、interval做周期性操作">
+    <meta name="description" content="1、debounce去抖动、减少不必要的处理当所发射数据的时间差小于设定值，debounce滤掉前N-1个节点，也就是说会留下最后一个在做响应式、动态搜索时，可用于减少不必要的网络请求次数2、throttleFirst防抖动获取这段时间内的第一个值，可用于按钮的防抖动，这与debounce不同，debounce是取最后一个，throttleFirst是取第一个#3、interval做周期性操作#4">
 <meta name="keywords" content="android javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android -- Rx应用场景记录">
 <meta property="og:url" content="https://lavenderstream.github.io/2017/04/01/Android-Rx应用场景记录/index.html">
 <meta property="og:site_name" content="Tiny hexo">
-<meta property="og:description" content="1、debounce去抖动、减少不必要的处理当所发射数据的时间差小于设定值，debounce滤掉前N-1个节点，也就是说会留下最后一个在做响应式、动态搜索时，可用于减少不必要的网络请求次数 2、throttleFirst防抖动获取这段时间内的第一个值，可用于按钮的防抖动，这与debounce不同，debounce是取最后一个，throttleFirst是取第一个 #3、interval做周期性操作">
+<meta property="og:description" content="1、debounce去抖动、减少不必要的处理当所发射数据的时间差小于设定值，debounce滤掉前N-1个节点，也就是说会留下最后一个在做响应式、动态搜索时，可用于减少不必要的网络请求次数2、throttleFirst防抖动获取这段时间内的第一个值，可用于按钮的防抖动，这与debounce不同，debounce是取最后一个，throttleFirst是取第一个#3、interval做周期性操作#4">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2018-10-27T03:19:15.543Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android -- Rx应用场景记录">
-<meta name="twitter:description" content="1、debounce去抖动、减少不必要的处理当所发射数据的时间差小于设定值，debounce滤掉前N-1个节点，也就是说会留下最后一个在做响应式、动态搜索时，可用于减少不必要的网络请求次数 2、throttleFirst防抖动获取这段时间内的第一个值，可用于按钮的防抖动，这与debounce不同，debounce是取最后一个，throttleFirst是取第一个 #3、interval做周期性操作">
+<meta name="twitter:description" content="1、debounce去抖动、减少不必要的处理当所发射数据的时间差小于设定值，debounce滤掉前N-1个节点，也就是说会留下最后一个在做响应式、动态搜索时，可用于减少不必要的网络请求次数2、throttleFirst防抖动获取这段时间内的第一个值，可用于按钮的防抖动，这与debounce不同，debounce是取最后一个，throttleFirst是取第一个#3、interval做周期性操作#4">
     
     
         
@@ -141,13 +141,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h1 id="1、debounce"><a href="#1、debounce" class="headerlink" title="1、debounce"></a>1、debounce</h1><h2 id="去抖动、减少不必要的处理"><a href="#去抖动、减少不必要的处理" class="headerlink" title="去抖动、减少不必要的处理"></a>去抖动、减少不必要的处理</h2><p>当所发射数据的时间差小于设定值，debounce滤掉前N-1个节点，也就是说会留下最后一个<br>在做响应式、动态搜索时，可用于减少不必要的网络请求次数</p>
-<h1 id="2、throttleFirst"><a href="#2、throttleFirst" class="headerlink" title="2、throttleFirst"></a>2、throttleFirst</h1><h2 id="防抖动"><a href="#防抖动" class="headerlink" title="防抖动"></a>防抖动</h2><p>获取这段时间内的第一个值，可用于按钮的防抖动，这与debounce不同，debounce是取最后一个，throttleFirst是取第一个</p>
-<p>#3、interval<br>做周期性操作</p>
-<p>#4、timer<br>做定时器相关的操作，貌似已经不推荐使用</p>
-<p>#5、switchMap<br>取消掉无用的数据、结和debounce做响应式优化<br>当发射一个新的数据项时，若之前的旧的订阅没有完成，即取消这些订阅，只返回最后一个</p>
-<p>#6、combineLatest<br>合并最近的N个节点<br>可用于账号、密码、验证码等的统一验证</p>
-
+    <h1 id="1、debounce"><a href="#1、debounce" class="headerlink" title="1、debounce"></a>1、debounce</h1><h2 id="去抖动、减少不必要的处理"><a href="#去抖动、减少不必要的处理" class="headerlink" title="去抖动、减少不必要的处理"></a>去抖动、减少不必要的处理</h2><p>当所发射数据的时间差小于设定值，debounce滤掉前N-1个节点，也就是说会留下最后一个<br>在做响应式、动态搜索时，可用于减少不必要的网络请求次数</p><h1 id="2、throttleFirst"><a href="#2、throttleFirst" class="headerlink" title="2、throttleFirst"></a>2、throttleFirst</h1><h2 id="防抖动"><a href="#防抖动" class="headerlink" title="防抖动"></a>防抖动</h2><p>获取这段时间内的第一个值，可用于按钮的防抖动，这与debounce不同，debounce是取最后一个，throttleFirst是取第一个</p><p>#3、interval<br>做周期性操作</p><p>#4、timer<br>做定时器相关的操作，貌似已经不推荐使用</p><p>#5、switchMap<br>取消掉无用的数据、结和debounce做响应式优化<br>当发射一个新的数据项时，若之前的旧的订阅没有完成，即取消这些订阅，只返回最后一个</p><p>#6、combineLatest<br>合并最近的N个节点<br>可用于账号、密码、验证码等的统一验证</p>
   </div>
 </article>
 

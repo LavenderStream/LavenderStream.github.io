@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="lombok 库是一个使用java注解，自动生成getter和setter方法的库官网 https://projectlombok.org/github https://github.com/rzwitserloot/lombok 导入和使用都非常简单 12provided files(&amp;apos;libs/lombok.jar&amp;apos;)provided  &amp;apos;org.glassfis">
+    <meta name="description" content="lombok库是一个使用java注解，自动生成getter和setter方法的库官网 https://projectlombok.org/github https://github.com/rzwitserloot/lombok导入和使用都非常简单12provided files(&amp;apos;libs/lombok.jar&amp;apos;)provided  &amp;apos;org.glassfish:j">
 <meta name="keywords" content="android javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android -- 自动生成Getter&#x2F;Setter">
 <meta property="og:url" content="https://lavenderstream.github.io/2017/05/19/Android-自动生成Getter-Setter/index.html">
 <meta property="og:site_name" content="Tiny hexo">
-<meta property="og:description" content="lombok 库是一个使用java注解，自动生成getter和setter方法的库官网 https://projectlombok.org/github https://github.com/rzwitserloot/lombok 导入和使用都非常简单 12provided files(&amp;apos;libs/lombok.jar&amp;apos;)provided  &amp;apos;org.glassfis">
+<meta property="og:description" content="lombok库是一个使用java注解，自动生成getter和setter方法的库官网 https://projectlombok.org/github https://github.com/rzwitserloot/lombok导入和使用都非常简单12provided files(&amp;apos;libs/lombok.jar&amp;apos;)provided  &amp;apos;org.glassfish:j">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2018-10-27T03:23:57.449Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android -- 自动生成Getter&#x2F;Setter">
-<meta name="twitter:description" content="lombok 库是一个使用java注解，自动生成getter和setter方法的库官网 https://projectlombok.org/github https://github.com/rzwitserloot/lombok 导入和使用都非常简单 12provided files(&amp;apos;libs/lombok.jar&amp;apos;)provided  &amp;apos;org.glassfis">
+<meta name="twitter:description" content="lombok库是一个使用java注解，自动生成getter和setter方法的库官网 https://projectlombok.org/github https://github.com/rzwitserloot/lombok导入和使用都非常简单12provided files(&amp;apos;libs/lombok.jar&amp;apos;)provided  &amp;apos;org.glassfish:j">
     
     
         
@@ -141,14 +141,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h3 id="lombok"><a href="#lombok" class="headerlink" title="lombok"></a>lombok</h3><p> 库是一个使用java注解，自动生成getter和setter方法的库<br>官网 <a href="https://projectlombok.org/" target="_blank" rel="noopener">https://projectlombok.org/</a><br>github <a href="https://github.com/rzwitserloot/lombok" target="_blank" rel="noopener">https://github.com/rzwitserloot/lombok</a></p>
-<p>导入和使用都非常简单<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">provided files(&apos;libs/lombok.jar&apos;)</span><br><span class="line">provided  &apos;org.glassfish:javax.annotation:10.0-b28&apos;</span><br></pre></td></tr></table></figure></p>
-<p>在studio 的android 项目中没有javax.annotation包，第二个依赖是用来添加javax包。编译之后，lombok能成功编译class文件，但在studio中没办法使用，还需下载一个lombok的插件</p>
-<p>引入lombok这个时候，项目增加了1.3M<br>另外JakeWharton大神并不建议使用<a href="https://www.reddit.com/r/androiddev/comments/2nneo7/anyone_using_project_lombok/" target="_blank" rel="noopener">https://www.reddit.com/r/androiddev/comments/2nneo7/anyone_using_project_lombok/</a></p>
-<h3 id="AutoValue"><a href="#AutoValue" class="headerlink" title="AutoValue"></a>AutoValue</h3><p>JakeWharton提到了AutoValue，并没有简化太多代码</p>
-<h3 id="kotlin"><a href="#kotlin" class="headerlink" title="kotlin"></a>kotlin</h3><p>使用kotlin是我了解到的简化代码最有效的途径<br>一是代码够简单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data class Dog(var name: String)</span><br></pre></td></tr></table></figure></p>
-<p>才外不必为apk增加太大的空间占用，打了一个包测试了一下，会增加大概不到100kb左右的大小还是可以接受的</p>
-
+    <h3 id="lombok"><a href="#lombok" class="headerlink" title="lombok"></a>lombok</h3><p>库是一个使用java注解，自动生成getter和setter方法的库<br>官网 <a href="https://projectlombok.org/" target="_blank" rel="noopener">https://projectlombok.org/</a><br>github <a href="https://github.com/rzwitserloot/lombok" target="_blank" rel="noopener">https://github.com/rzwitserloot/lombok</a></p><p>导入和使用都非常简单<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">provided files(&apos;libs/lombok.jar&apos;)</span><br><span class="line">provided  &apos;org.glassfish:javax.annotation:10.0-b28&apos;</span><br></pre></td></tr></table></figure><p></p><p>在studio 的android 项目中没有javax.annotation包，第二个依赖是用来添加javax包。编译之后，lombok能成功编译class文件，但在studio中没办法使用，还需下载一个lombok的插件</p><p>引入lombok这个时候，项目增加了1.3M<br>另外JakeWharton大神并不建议使用<a href="https://www.reddit.com/r/androiddev/comments/2nneo7/anyone_using_project_lombok/" target="_blank" rel="noopener">https://www.reddit.com/r/androiddev/comments/2nneo7/anyone_using_project_lombok/</a></p><h3 id="AutoValue"><a href="#AutoValue" class="headerlink" title="AutoValue"></a>AutoValue</h3><p>JakeWharton提到了AutoValue，并没有简化太多代码</p><h3 id="kotlin"><a href="#kotlin" class="headerlink" title="kotlin"></a>kotlin</h3><p>使用kotlin是我了解到的简化代码最有效的途径<br>一是代码够简单<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data class Dog(var name: String)</span><br></pre></td></tr></table></figure><p></p><p>才外不必为apk增加太大的空间占用，打了一个包测试了一下，会增加大概不到100kb左右的大小还是可以接受的</p>
   </div>
 </article>
 

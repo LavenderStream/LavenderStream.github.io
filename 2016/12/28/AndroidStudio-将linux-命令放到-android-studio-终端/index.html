@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="用mac敲代码固然是好，但也实在是买不起，linux的终端命令大大方便了平时的开发，但是windows 的cmd简直是不能言表。 今天用了一点时间弄了一下，基本上可以实现使用android studio 提供的终端，完成基本的命令。    实现方式也很简单在windows都会用到git的工具， 就是git for windows，这里面实现了好多linux下的命令，在安装目录下的usr\bin，下">
+    <meta name="description" content="用mac敲代码固然是好，但也实在是买不起，linux的终端命令大大方便了平时的开发，但是windows 的cmd简直是不能言表。今天用了一点时间弄了一下，基本上可以实现使用android studio 提供的终端，完成基本的命令。实现方式也很简单在windows都会用到git的工具， 就是git for windows，这里面实现了好多linux下的命令，在安装目录下的usr\bin，下面，我们只">
 <meta name="keywords" content="android javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AndroidStudio -- 将linux 命令放到 android studio 终端">
 <meta property="og:url" content="https://lavenderstream.github.io/2016/12/28/AndroidStudio-将linux-命令放到-android-studio-终端/index.html">
 <meta property="og:site_name" content="Tiny hexo">
-<meta property="og:description" content="用mac敲代码固然是好，但也实在是买不起，linux的终端命令大大方便了平时的开发，但是windows 的cmd简直是不能言表。 今天用了一点时间弄了一下，基本上可以实现使用android studio 提供的终端，完成基本的命令。    实现方式也很简单在windows都会用到git的工具， 就是git for windows，这里面实现了好多linux下的命令，在安装目录下的usr\bin，下">
+<meta property="og:description" content="用mac敲代码固然是好，但也实在是买不起，linux的终端命令大大方便了平时的开发，但是windows 的cmd简直是不能言表。今天用了一点时间弄了一下，基本上可以实现使用android studio 提供的终端，完成基本的命令。实现方式也很简单在windows都会用到git的工具， 就是git for windows，这里面实现了好多linux下的命令，在安装目录下的usr\bin，下面，我们只">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-8decaffd9766091b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-e1658da1f7a54607.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -20,7 +20,7 @@
 <meta property="og:updated_time" content="2018-10-27T03:26:15.729Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AndroidStudio -- 将linux 命令放到 android studio 终端">
-<meta name="twitter:description" content="用mac敲代码固然是好，但也实在是买不起，linux的终端命令大大方便了平时的开发，但是windows 的cmd简直是不能言表。 今天用了一点时间弄了一下，基本上可以实现使用android studio 提供的终端，完成基本的命令。    实现方式也很简单在windows都会用到git的工具， 就是git for windows，这里面实现了好多linux下的命令，在安装目录下的usr\bin，下">
+<meta name="twitter:description" content="用mac敲代码固然是好，但也实在是买不起，linux的终端命令大大方便了平时的开发，但是windows 的cmd简直是不能言表。今天用了一点时间弄了一下，基本上可以实现使用android studio 提供的终端，完成基本的命令。实现方式也很简单在windows都会用到git的工具， 就是git for windows，这里面实现了好多linux下的命令，在安装目录下的usr\bin，下面，我们只">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1285832-8decaffd9766091b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
     
@@ -150,15 +150,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>用mac敲代码固然是好，但也实在是买不起，linux的终端命令大大方便了平时的开发，但是windows 的cmd简直是不能言表。</p>
-<p>今天用了一点时间弄了一下，基本上可以实现使用android studio 提供的终端，完成基本的命令。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-8decaffd9766091b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-e1658da1f7a54607.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1285832-26acf78fe9e953bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p>实现方式也很简单<br>在windows都会用到git的工具， 就是git for windows，这里面实现了好多linux下的命令，在安装目录下的usr\bin，下面，我们只需在windows的环境变量中添加这个路径就可以了。</p>
-<p>配置完成之后，在cmd中就可以使用linux命令了，但是差强人意。ls 列出列表不带颜色，无法区分文件的形式。把bin中的ls.exe 新命个名，就叫ls1.exe。然后写个ls.cmd 用于启动这个exe<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@ECHO OFF</span><br><span class="line">ls1 --color %*</span><br><span class="line">@ECHO ON</span><br></pre></td></tr></table></figure></p>
-<p>ok, 这样在开发中也就方便多了</p>
-
+    <p>用mac敲代码固然是好，但也实在是买不起，linux的终端命令大大方便了平时的开发，但是windows 的cmd简直是不能言表。</p><p>今天用了一点时间弄了一下，基本上可以实现使用android studio 提供的终端，完成基本的命令。</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-8decaffd9766091b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-e1658da1f7a54607.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-26acf78fe9e953bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p><p>实现方式也很简单<br>在windows都会用到git的工具， 就是git for windows，这里面实现了好多linux下的命令，在安装目录下的usr\bin，下面，我们只需在windows的环境变量中添加这个路径就可以了。</p><p>配置完成之后，在cmd中就可以使用linux命令了，但是差强人意。ls 列出列表不带颜色，无法区分文件的形式。把bin中的ls.exe 新命个名，就叫ls1.exe。然后写个ls.cmd 用于启动这个exe<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@ECHO OFF</span><br><span class="line">ls1 --color %*</span><br><span class="line">@ECHO ON</span><br></pre></td></tr></table></figure><p></p><p>ok, 这样在开发中也就方便多了</p>
   </div>
 </article>
 
