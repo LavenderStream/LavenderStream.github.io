@@ -56,35 +56,40 @@
 <body class="max-width mx-auto px3 ltr">
     
       <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
+    <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+    <span id="menu">
     <span id="nav">
       <ul>
-         
+          
+          
           <li><a href="/">Home</a></li>
-         
+          
+          
           <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
-         
-          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
-         
+          
+          
+          <li><a href="https://www.jianshu.com/u/4215db84d54e" target="_blank">JianShu</a></li>
+          
+          
+          <li><a href="https://github.com/LavenderStream" target="_blank">GitHub</a></li>
+          
+          
           <li><a href="/about/">About</a></li>
-        
+          
       </ul>
     </span>
     <br>
     <span id="actions">
       <ul>
-        
-        <li><a class="icon" href="/2017/02/17/Android-夜间模式切换/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" href="/2016/12/24/Android-RxAndroid-2-0-学习笔记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+          
+          <li><a class="icon" href="/2017/02/17/Android-夜间模式切换/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+          
+          <li><a class="icon" href="/2016/12/24/Android-RxAndroid-2-0-学习笔记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+          
+          <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
       <span id="i-prev" class="info" style="display:none;">Previous post</span>
@@ -156,7 +161,7 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/1285832-e1658da1f7a54607.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1285832-26acf78fe9e953bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
 <p>实现方式也很简单<br>在windows都会用到git的工具， 就是git for windows，这里面实现了好多linux下的命令，在安装目录下的usr\bin，下面，我们只需在windows的环境变量中添加这个路径就可以了。</p>
-<p>配置完成之后，在cmd中就可以使用linux命令了，但是差强人意。ls 列出列表不带颜色，无法区分文件的形式。把bin中的ls.exe 新命个名，就叫ls1.exe。然后写个ls.cmd 用于启动这个exe<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@ECHO OFF</span><br><span class="line">ls1 --color %*</span><br><span class="line">@ECHO ON</span><br></pre></td></tr></table></figure></p>
+<p>配置完成之后，在cmd中就可以使用linux命令了，但是差强人意。ls 列出列表不带颜色，无法区分文件的形式。把bin中的ls.exe 新命个名，就叫ls1.exe。然后写个ls.cmd 用于启动这个exe<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@ECHO</span> OFF</span><br><span class="line">ls1 --color %*</span><br><span class="line"><span class="variable">@ECHO</span> ON</span><br></pre></td></tr></table></figure></p>
 <p>ok, 这样在开发中也就方便多了</p>
 
   </div>
@@ -216,26 +221,31 @@
 
         
         <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2018 Tiny
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
-         
-          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
-         
-          <li><a href="/about/">About</a></li>
-        
-      </ul>
-    </nav>
-  </div>
+    <div class="footer-left">
+        Copyright &copy; 2018 by Tiny
+    </div>
+    <div class="footer-right">
+        <nav>
+            <ul>
+                
+                
+                <li><a href="/">Home</a></li>
+                
+                
+                <li><a href="/archives/">Writing</a></li>
+                
+                
+                <li><a href="https://www.jianshu.com/u/4215db84d54e" target="_blank">JianShu</a></li>
+                
+                
+                <li><a href="https://github.com/LavenderStream" target="_blank">GitHub</a></li>
+                
+                
+                <li><a href="/about/">About</a></li>
+                
+            </ul>
+        </nav>
+    </div>
 </footer>
 
     </div>

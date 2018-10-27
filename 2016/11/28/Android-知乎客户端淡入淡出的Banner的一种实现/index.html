@@ -54,35 +54,40 @@
 <body class="max-width mx-auto px3 ltr">
     
       <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
+    <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+    <span id="menu">
     <span id="nav">
       <ul>
-         
+          
+          
           <li><a href="/">Home</a></li>
-         
+          
+          
           <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
-         
-          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
-         
+          
+          
+          <li><a href="https://www.jianshu.com/u/4215db84d54e" target="_blank">JianShu</a></li>
+          
+          
+          <li><a href="https://github.com/LavenderStream" target="_blank">GitHub</a></li>
+          
+          
           <li><a href="/about/">About</a></li>
-        
+          
       </ul>
     </span>
     <br>
     <span id="actions">
       <ul>
-        
-        <li><a class="icon" href="/2016/11/29/Android-Glide-学习笔记/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" href="/2016/11/15/Android-Fresco、Glide、Picasso的比较/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+          
+          <li><a class="icon" href="/2016/11/29/Android-Glide-学习笔记/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+          
+          <li><a class="icon" href="/2016/11/15/Android-Fresco、Glide、Picasso的比较/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+          
+          <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
       <span id="i-prev" class="info" style="display:none;">Previous post</span>
@@ -146,7 +151,7 @@
     <h4 id="新版知乎客户端发现页面上有一个淡入淡出的banner"><a href="#新版知乎客户端发现页面上有一个淡入淡出的banner" class="headerlink" title="新版知乎客户端发现页面上有一个淡入淡出的banner"></a>新版知乎客户端发现页面上有一个淡入淡出的banner</h4><p>最初的想法就是拿viewpager实现，重写protected void onPageScrolled(int position, float offset, int offsetPixels)方法，但是应该我得拿到所有page，去改变两个page的不同状态。转念一想，ViewPager有一个PageTransformer，不如拿这个去实现</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1285832-8e8b569c05acee22.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ截图20161128125301.png"></p>
 <p>position返回的是front-and-center，可以理解为0是中心0~1是右边的page；-1~0是左边的page</p>
-<p>大概的代码会是<br>左边的page得叠加他的位置，让他看起来会向左移动， 右边的page应该先移动到位，然后阻止他的移动，最后改变两个page的透明度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int pageWidth = view.getWidth();</span><br><span class="line"></span><br><span class="line">if (position &lt;= 1) &#123;</span><br><span class="line">    if (position &lt; 0) &#123;</span><br><span class="line">        view.setTranslationX( - pageWidth * position);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        view.setTranslationX(pageWidth);</span><br><span class="line">        view.setTranslationX( - pageWidth * position);</span><br><span class="line">    &#125;</span><br><span class="line">    float alpha = Math.max(0, 1 - Math.abs(position));</span><br><span class="line">    view.setAlpha(alpha);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    view.setAlpha(0f);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>大概的代码会是<br>左边的page得叠加他的位置，让他看起来会向左移动， 右边的page应该先移动到位，然后阻止他的移动，最后改变两个page的透明度。<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int pageWidth = <span class="built_in">view</span>.getWidth();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">position</span> &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">position</span> &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">view</span>.setTranslationX( - pageWidth * <span class="built_in">position</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">view</span>.setTranslationX(pageWidth);</span><br><span class="line">        <span class="built_in">view</span>.setTranslationX( - pageWidth * <span class="built_in">position</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">float</span> alpha = Math.<span class="built_in">max</span>(<span class="number">0</span>, <span class="number">1</span> - Math.<span class="built_in">abs</span>(<span class="built_in">position</span>));</span><br><span class="line">    <span class="built_in">view</span>.setAlpha(alpha);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">view</span>.setAlpha(<span class="number">0f</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这就完成了viewpager的淡入淡出，感觉比重写onPageScrolled方便</p>
 
   </div>
@@ -206,26 +211,31 @@
 
         
         <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2018 Tiny
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
-         
-          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
-         
-          <li><a href="/about/">About</a></li>
-        
-      </ul>
-    </nav>
-  </div>
+    <div class="footer-left">
+        Copyright &copy; 2018 by Tiny
+    </div>
+    <div class="footer-right">
+        <nav>
+            <ul>
+                
+                
+                <li><a href="/">Home</a></li>
+                
+                
+                <li><a href="/archives/">Writing</a></li>
+                
+                
+                <li><a href="https://www.jianshu.com/u/4215db84d54e" target="_blank">JianShu</a></li>
+                
+                
+                <li><a href="https://github.com/LavenderStream" target="_blank">GitHub</a></li>
+                
+                
+                <li><a href="/about/">About</a></li>
+                
+            </ul>
+        </nav>
+    </div>
 </footer>
 
     </div>

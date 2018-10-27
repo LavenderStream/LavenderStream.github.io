@@ -62,35 +62,40 @@
 <body class="max-width mx-auto px3 ltr">
     
       <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
+    <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+    <span id="menu">
     <span id="nav">
       <ul>
-         
+          
+          
           <li><a href="/">Home</a></li>
-         
+          
+          
           <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
-         
-          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
-         
+          
+          
+          <li><a href="https://www.jianshu.com/u/4215db84d54e" target="_blank">JianShu</a></li>
+          
+          
+          <li><a href="https://github.com/LavenderStream" target="_blank">GitHub</a></li>
+          
+          
           <li><a href="/about/">About</a></li>
-        
+          
       </ul>
     </span>
     <br>
     <span id="actions">
       <ul>
-        
-        <li><a class="icon" href="/2016/01/20/Android-应用差量更新/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" href="/2016/01/05/AndroidStudio/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+          
+          <li><a class="icon" href="/2016/01/20/Android-应用差量更新/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+          
+          <li><a class="icon" href="/2016/01/05/AndroidStudio/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+          
+          <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
       <span id="i-prev" class="info" style="display:none;">Previous post</span>
@@ -175,7 +180,7 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/1285832-cf4e43e3095e0f87.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
 <p>然后再activity中直接调用就好了</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line">package org.chitarra.tiny.myapplication.view;</span><br><span class="line"></span><br><span class="line">import android.content.Intent;</span><br><span class="line"></span><br><span class="line">import android.net.Uri;</span><br><span class="line"></span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.os.Environment;</span><br><span class="line">import android.os.Handler;</span><br><span class="line">import android.os.Message;</span><br><span class="line"></span><br><span class="line">import android.support.design.widget.FloatingActionButton;</span><br><span class="line"></span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line"></span><br><span class="line">import android.util.Log;</span><br><span class="line"></span><br><span class="line">import android.view.View;</span><br><span class="line"></span><br><span class="line">import android.widget.Toast;</span><br><span class="line">import static com.cundong.utils.PatchUtils.patch;</span><br><span class="line"></span><br><span class="line">import org.chitarra.tiny.myapplication.R;</span><br><span class="line"></span><br><span class="line">import java.io.File;</span><br><span class="line">public class UpdataActivity extends AppCompatActivity &#123;</span><br><span class="line">    public static final String PATH = Environment.getExternalStorageDirectory() +</span><br><span class="line">        File.separator;</span><br><span class="line"></span><br><span class="line">    public static final String NEW_APK_PATH = PATH + &quot;new.apk&quot;;</span><br><span class="line"></span><br><span class="line">    public static final String PATCH_PATH = PATH + &quot;test.patch&quot;;</span><br><span class="line"></span><br><span class="line">    static &#123;</span><br><span class="line">        System.loadLibrary(&quot;ApkPatchLibrary&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private FloatingActionButton mBut;</span><br><span class="line">    Handler mHandler = new Handler() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void handleMessage(Message msg) &#123;</span><br><span class="line">                switch (msg.what) &#123;</span><br><span class="line">                case 0:</span><br><span class="line">                    Toast.makeText(UpdataActivity.this, &quot;OK&quot;, Toast.LENGTH_SHORT)</span><br><span class="line">                         .show();</span><br><span class="line">                    installApk();</span><br><span class="line"></span><br><span class="line">                    break;</span><br><span class="line"></span><br><span class="line">                case -1:</span><br><span class="line">                    Toast.makeText(UpdataActivity.this, &quot;error&quot;,</span><br><span class="line">                        Toast.LENGTH_SHORT).show();</span><br><span class="line"></span><br><span class="line">                    break;</span><br><span class="line"></span><br><span class="line">                default:</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                super.handleMessage(msg);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_updata);</span><br><span class="line"></span><br><span class="line">        this.mBut = (FloatingActionButton) findViewById(R.id.fab);</span><br><span class="line">        this.mBut.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void onClick(View view) &#123;</span><br><span class="line">                    File patchFile = new File(PATCH_PATH);</span><br><span class="line">                    if (!patchFile.exists()) &#123;</span><br><span class="line">                        Toast.makeText(UpdataActivity.this, &quot;patch not exists&quot;,</span><br><span class="line">                            Toast.LENGTH_SHORT).show();</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        new PatchThread().start();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void installApk() &#123;</span><br><span class="line">        File file = new File(NEW_APK_PATH);</span><br><span class="line"></span><br><span class="line">        if (file.exists()) &#123;</span><br><span class="line">            Uri uri = Uri.fromFile(file);</span><br><span class="line">            Intent installIntent = new Intent(Intent.ACTION_VIEW);</span><br><span class="line">            installIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">            installIntent.setDataAndType(uri,</span><br><span class="line">                &quot;application/vnd.android.package-archive&quot;);</span><br><span class="line">            this.startActivity(installIntent);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    class PatchThread extends Thread &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            String oldAppPatch = getApplicationContext().getApplicationInfo().sourceDir;</span><br><span class="line"></span><br><span class="line">            int patchResult = patch(oldAppPatch, NEW_APK_PATH, PATCH_PATH);</span><br><span class="line"></span><br><span class="line">            if (patchResult == 0) &#123;</span><br><span class="line">                mHandler.sendEmptyMessage(0);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                mHandler.sendEmptyMessage(-1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码不是很复杂， 就没写注释了，但是还要记录几点，省得以后忘记<br>NEW_APK_PATH ：是与差分文件合并生成的apk，在指定目录下，就会生成一个new.apk<br>PATCH_PATH ：拆分文件， xxxx.patch的格式的<br>patch： 这是一个本地方法，其中三个变量都是需要传的，第一个变量可以通过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getApplicationContext().getApplicationInfo().sourceDir;</span><br></pre></td></tr></table></figure></p>
+<p>代码不是很复杂， 就没写注释了，但是还要记录几点，省得以后忘记<br>NEW_APK_PATH ：是与差分文件合并生成的apk，在指定目录下，就会生成一个new.apk<br>PATCH_PATH ：拆分文件， xxxx.patch的格式的<br>patch： 这是一个本地方法，其中三个变量都是需要传的，第一个变量可以通过<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">getApplicationContext</span>()<span class="selector-class">.getApplicationInfo</span>()<span class="selector-class">.sourceDir</span>;</span><br></pre></td></tr></table></figure></p>
 <p>这种方式得到</p>
 <p>最后的最后的最后， 重要的事情说三遍，在AndroidManifest.xml中要加入权限</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1285832-a5044bc949b7f8a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
@@ -248,26 +253,31 @@
 
         
         <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2018 Tiny
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
-         
-          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
-         
-          <li><a href="/about/">About</a></li>
-        
-      </ul>
-    </nav>
-  </div>
+    <div class="footer-left">
+        Copyright &copy; 2018 by Tiny
+    </div>
+    <div class="footer-right">
+        <nav>
+            <ul>
+                
+                
+                <li><a href="/">Home</a></li>
+                
+                
+                <li><a href="/archives/">Writing</a></li>
+                
+                
+                <li><a href="https://www.jianshu.com/u/4215db84d54e" target="_blank">JianShu</a></li>
+                
+                
+                <li><a href="https://github.com/LavenderStream" target="_blank">GitHub</a></li>
+                
+                
+                <li><a href="/about/">About</a></li>
+                
+            </ul>
+        </nav>
+    </div>
 </footer>
 
     </div>

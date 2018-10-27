@@ -57,35 +57,40 @@
 <body class="max-width mx-auto px3 ltr">
     
       <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
+    <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+    <span id="menu">
     <span id="nav">
       <ul>
-         
+          
+          
           <li><a href="/">Home</a></li>
-         
+          
+          
           <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
-         
-          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
-         
+          
+          
+          <li><a href="https://www.jianshu.com/u/4215db84d54e" target="_blank">JianShu</a></li>
+          
+          
+          <li><a href="https://github.com/LavenderStream" target="_blank">GitHub</a></li>
+          
+          
           <li><a href="/about/">About</a></li>
-        
+          
       </ul>
     </span>
     <br>
     <span id="actions">
       <ul>
-        
-        <li><a class="icon" href="/2017/05/19/Android-自动生成Getter-Setter/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" href="/2017/05/08/Android-自定义注解学习笔记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+          
+          <li><a class="icon" href="/2017/05/19/Android-自动生成Getter-Setter/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+          
+          <li><a class="icon" href="/2017/05/08/Android-自定义注解学习笔记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+          
+          <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
       <span id="i-prev" class="info" style="display:none;">Previous post</span>
@@ -157,7 +162,7 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/1285832-3dd63ea9d8e0023b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
 <p>再设置中配置，这里的style我选的是 aosp 的style，因为是android 项目，并没有直接使用默认的。配置好之后，我再对代码进行格式化的时候，就使用了google-java-format，不再是之前再ide中配置的那个了。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1285832-282c18e562dfa9f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p>2、接下来写shell<br> 我们在项目根目录中可以找到.git 下的hooks文件夹。里面存在一堆文件，就像这样。<br><img src="http://upload-images.jianshu.io/upload_images/1285832-3ab997a5eb96622c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>可以创建一个空文件，名字为pre-commit。这里我直接贴上一段代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#</span><br><span class="line">array=`git diff-index --name-only HEAD`</span><br><span class="line"></span><br><span class="line">for name in $&#123;array&#125;</span><br><span class="line">do</span><br><span class="line">    extension=$&#123;name##*.&#125;</span><br><span class="line">    if [[ $&#123;extension&#125; == &quot;java&quot; || $&#123;extension&#125; == &quot;xml&quot; || $&#123;extension&#125; == &quot;kt&quot; ]];then</span><br><span class="line">      D:\\Applications\\tiny-tool\\formatjava.cmd $&#123;name&#125;</span><br><span class="line">      if [ $? -eq 0 ]; then</span><br><span class="line">      echo &quot;format ok&quot; $&#123;name&#125;</span><br><span class="line">      else exit 1</span><br><span class="line">      fi</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">exec git add ./</span><br></pre></td></tr></table></figure></p>
+<p>2、接下来写shell<br> 我们在项目根目录中可以找到.git 下的hooks文件夹。里面存在一堆文件，就像这样。<br><img src="http://upload-images.jianshu.io/upload_images/1285832-3ab997a5eb96622c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>可以创建一个空文件，名字为pre-commit。这里我直接贴上一段代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">array=`git diff-index --name-only HEAD`</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> <span class="variable">$&#123;array&#125;</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    extension=<span class="variable">$&#123;name##*.&#125;</span></span><br><span class="line">    <span class="keyword">if</span> [[ <span class="variable">$&#123;extension&#125;</span> == <span class="string">"java"</span> || <span class="variable">$&#123;extension&#125;</span> == <span class="string">"xml"</span> || <span class="variable">$&#123;extension&#125;</span> == <span class="string">"kt"</span> ]];<span class="keyword">then</span></span><br><span class="line">      D:\\Applications\\tiny-tool\\formatjava.cmd <span class="variable">$&#123;name&#125;</span></span><br><span class="line">      <span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">      <span class="built_in">echo</span> <span class="string">"format ok"</span> <span class="variable">$&#123;name&#125;</span></span><br><span class="line">      <span class="keyword">else</span> <span class="built_in">exit</span> 1</span><br><span class="line">      <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exec</span> git add ./</span><br></pre></td></tr></table></figure></p>
 <p>大兄弟，别的都好说， <figure class="highlight plain"><figcaption><span>$&#123;name&#125; ```有点看不明白，那是因为还差一个文件没有贴上来。就是formatjava.cmd这个文件</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">@ECHO OFF</span><br><span class="line">java -jar D:\Applications\tiny-tool\google-java-format-1.3-all-deps.jar --replace %*</span><br><span class="line">@ECHO ON</span><br></pre></td></tr></table></figure></p>
 <p>看这个工具还挺好用，可以直接格式化java代码，直接写一个cmd放到系统path中去，平时也能使用。</p>
 <p>这样，再git commit 之后，会自动将提交的java文件进行格式化。这样就在本地和远程都使用同一套代码规范了。</p>
@@ -221,26 +226,31 @@
 
         
         <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2018 Tiny
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
-         
-          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
-         
-          <li><a href="/about/">About</a></li>
-        
-      </ul>
-    </nav>
-  </div>
+    <div class="footer-left">
+        Copyright &copy; 2018 by Tiny
+    </div>
+    <div class="footer-right">
+        <nav>
+            <ul>
+                
+                
+                <li><a href="/">Home</a></li>
+                
+                
+                <li><a href="/archives/">Writing</a></li>
+                
+                
+                <li><a href="https://www.jianshu.com/u/4215db84d54e" target="_blank">JianShu</a></li>
+                
+                
+                <li><a href="https://github.com/LavenderStream" target="_blank">GitHub</a></li>
+                
+                
+                <li><a href="/about/">About</a></li>
+                
+            </ul>
+        </nav>
+    </div>
 </footer>
 
     </div>
