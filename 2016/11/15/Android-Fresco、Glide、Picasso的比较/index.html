@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="昨天去面试，谈到了几个图片加载框架。Fresco；Glide；Picasso面试官问起了那个框架更好一点，我说Glide吧，并说了几个在之前项目中实际应用的例子，和glide的一些原理。阐述了一下我的观点。回到家总觉得是没有完全的阐述好我的观点，也是因为我没看过Fresco和Picasso的源码，只留心过glide的原理。因为水平有限，分析三个框架的源码不太现实，我觉得还是要拿出数据来证明（碰巧最">
+<meta name="keywords" content="android javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android -- Fresco、Glide、Picasso的比较">
+<meta property="og:url" content="https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/index.html">
+<meta property="og:site_name" content="Tiny hexo">
+<meta property="og:description" content="昨天去面试，谈到了几个图片加载框架。Fresco；Glide；Picasso面试官问起了那个框架更好一点，我说Glide吧，并说了几个在之前项目中实际应用的例子，和glide的一些原理。阐述了一下我的观点。回到家总觉得是没有完全的阐述好我的观点，也是因为我没看过Fresco和Picasso的源码，只留心过glide的原理。因为水平有限，分析三个框架的源码不太现实，我觉得还是要拿出数据来证明（碰巧最">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-a293cd203d8665c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-446b23a2bbc8a8a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-a504f70899a98051.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-60a00870fbdbceeb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-fd848b20ff195071.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-b3e2953866c9065e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-f93912fe7a5dfee9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-467fdcaf90b2511c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-7f9007b39b2a0f55.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-10-27T03:16:52.253Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android -- Fresco、Glide、Picasso的比较">
+<meta name="twitter:description" content="昨天去面试，谈到了几个图片加载框架。Fresco；Glide；Picasso面试官问起了那个框架更好一点，我说Glide吧，并说了几个在之前项目中实际应用的例子，和glide的一些原理。阐述了一下我的观点。回到家总觉得是没有完全的阐述好我的观点，也是因为我没看过Fresco和Picasso的源码，只留心过glide的原理。因为水平有限，分析三个框架的源码不太现实，我觉得还是要拿出数据来证明（碰巧最">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1285832-a293cd203d8665c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Android -- Fresco、Glide、Picasso的比较</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
+         
+          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2016/11/28/Android-知乎客户端淡入淡出的Banner的一种实现/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2016/06/17/Android-修改状态栏文字颜色/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&text=Android -- Fresco、Glide、Picasso的比较"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&title=Android -- Fresco、Glide、Picasso的比较"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&is_video=false&description=Android -- Fresco、Glide、Picasso的比较"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android -- Fresco、Glide、Picasso的比较&body=Check out this article: https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&title=Android -- Fresco、Glide、Picasso的比较"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&title=Android -- Fresco、Glide、Picasso的比较"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&title=Android -- Fresco、Glide、Picasso的比较"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&title=Android -- Fresco、Glide、Picasso的比较"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&name=Android -- Fresco、Glide、Picasso的比较&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、先说Fresco"><span class="toc-number">1.</span> <span class="toc-text">1、先说Fresco</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、Glide"><span class="toc-number">2.</span> <span class="toc-text">2、Glide</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、Picasso"><span class="toc-number">3.</span> <span class="toc-text">3、Picasso</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、最后看下依赖包大小"><span class="toc-number">4.</span> <span class="toc-text">3、最后看下依赖包大小</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android -- Fresco、Glide、Picasso的比较
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Tiny</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-11-15T03:46:52.000Z" itemprop="datePublished">2016-11-15</time>
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>昨天去面试，谈到了几个图片加载框架。Fresco；Glide；Picasso<br>面试官问起了那个框架更好一点，我说Glide吧，并说了几个在之前项目中实际应用的例子，和glide的一些原理。阐述了一下我的观点。<br>回到家总觉得是没有完全的阐述好我的观点，也是因为我没看过Fresco和Picasso的源码，只留心过glide的原理。因为水平有限，分析三个框架的源码不太现实，我觉得还是要拿出数据来证明（碰巧最近待业在家）。</p>
+<p>加载资源：<br>每一种框架都分别尝试了2种图片<br>第一张图是501x428、找了一个平时项目中较平均的分辨率吧<br><a href="http://www.youxiping.com/data/attachment/portal/201509/11/144756yp966fkf07173v4z.jpg" target="_blank" rel="noopener">http://www.youxiping.com/data/attachment/portal/201509/11/144756yp966fkf07173v4z.jpg</a><br>第二张图是1440*2560、整一个大一点的图片加载试试看吧<br><a href="http://bizhi.cnanzhi.com/upload/bizhi/2014/1202/14175104904742.jpg" target="_blank" rel="noopener">http://bizhi.cnanzhi.com/upload/bizhi/2014/1202/14175104904742.jpg</a></p>
+<h3 id="1、先说Fresco"><a href="#1、先说Fresco" class="headerlink" title="1、先说Fresco"></a>1、先说Fresco</h3><p>配置按照官方的教程，姑且称之为0配置吧：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class MyApplication extends Application &#123;@Override public void onCreate() &#123;</span><br><span class="line">        super.onCreate();</span><br><span class="line">        Fresco.initialize(this);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;com.facebook.drawee.view.SimpleDraweeView</span><br><span class="line">    android:layout_centerInParent=&quot;true&quot;</span><br><span class="line">    android:id=&quot;@+id/my_image_view&quot;</span><br><span class="line">    android:layout_width=&quot;130dp&quot;</span><br><span class="line">    android:layout_height=&quot;130dp&quot;</span><br><span class="line">    /&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imageView.setImageURI(&quot;xxxx&quot;);</span><br></pre></td></tr></table></figure>
+<p>这是加载图片的例子<br>加载第一张图片时看一下内存的使用率</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-a293cd203d8665c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>比较大分辨率的图片</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-446b23a2bbc8a8a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h3 id="2、Glide"><a href="#2、Glide" class="headerlink" title="2、Glide"></a>2、Glide</h3><p>glide 的使用相对来说更为简单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Glide</span><br><span class="line">.with(this)</span><br><span class="line">.load(&quot;http://www.youxiping.com/data/attachment/portal/201509/11/144756yp966fkf07173v4z.jpg&quot;)</span><br><span class="line">.into(imageView);</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-a504f70899a98051.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-60a00870fbdbceeb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h3 id="3、Picasso"><a href="#3、Picasso" class="headerlink" title="3、Picasso"></a>3、Picasso</h3><p>就使用上来讲，Picasso和Glide差别很小了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Picasso</span><br><span class="line">.with(this)</span><br><span class="line">.load(&quot;http://www.youxiping.com/data/attachment/portal/201509/11/144756yp966fkf07173v4z.jpg&quot;)</span><br><span class="line">.into(imageView);</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-fd848b20ff195071.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br><img src="http://upload-images.jianshu.io/upload_images/1285832-b3e2953866c9065e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h3 id="3、最后看下依赖包大小"><a href="#3、最后看下依赖包大小" class="headerlink" title="3、最后看下依赖包大小"></a>3、最后看下依赖包大小</h3><p><img src="http://upload-images.jianshu.io/upload_images/1285832-f93912fe7a5dfee9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-467fdcaf90b2511c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-7f9007b39b2a0f55.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
+         
+          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、先说Fresco"><span class="toc-number">1.</span> <span class="toc-text">1、先说Fresco</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、Glide"><span class="toc-number">2.</span> <span class="toc-text">2、Glide</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、Picasso"><span class="toc-number">3.</span> <span class="toc-text">3、Picasso</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、最后看下依赖包大小"><span class="toc-number">4.</span> <span class="toc-text">3、最后看下依赖包大小</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&text=Android -- Fresco、Glide、Picasso的比较"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&title=Android -- Fresco、Glide、Picasso的比较"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&is_video=false&description=Android -- Fresco、Glide、Picasso的比较"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android -- Fresco、Glide、Picasso的比较&body=Check out this article: https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&title=Android -- Fresco、Glide、Picasso的比较"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&title=Android -- Fresco、Glide、Picasso的比较"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&title=Android -- Fresco、Glide、Picasso的比较"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&title=Android -- Fresco、Glide、Picasso的比较"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://lavenderstream.github.io/2016/11/15/Android-Fresco、Glide、Picasso的比较/&name=Android -- Fresco、Glide、Picasso的比较&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Tiny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
+         
+          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

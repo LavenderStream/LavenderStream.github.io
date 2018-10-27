@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="团队合作项目，使用git时会发生这种情况 ： 每个人的代码格式不同，对比工具再做对比的时候常常会当作冲突来处理，虽然有些工具会有明显的提示，但还是会占用自己太多时间。同时，一个团队保持一致的代码风格和规范，甚至是工具，都是有必要的。 经过一顿 google 之后， 发现git 的 hook pre-commit这个脚本可以指定，再commit之前插入一些脚本执行，要是再这个脚本中加上对代码的格式化">
+<meta name="keywords" content="android javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git -- git commit hook">
+<meta property="og:url" content="https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/index.html">
+<meta property="og:site_name" content="Tiny hexo">
+<meta property="og:description" content="团队合作项目，使用git时会发生这种情况 ： 每个人的代码格式不同，对比工具再做对比的时候常常会当作冲突来处理，虽然有些工具会有明显的提示，但还是会占用自己太多时间。同时，一个团队保持一致的代码风格和规范，甚至是工具，都是有必要的。 经过一顿 google 之后， 发现git 的 hook pre-commit这个脚本可以指定，再commit之前插入一些脚本执行，要是再这个脚本中加上对代码的格式化">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-3dd63ea9d8e0023b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-282c18e562dfa9f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-3ab997a5eb96622c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-6aa2d6812f99467e.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-10-27T03:28:22.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git -- git commit hook">
+<meta name="twitter:description" content="团队合作项目，使用git时会发生这种情况 ： 每个人的代码格式不同，对比工具再做对比的时候常常会当作冲突来处理，虽然有些工具会有明显的提示，但还是会占用自己太多时间。同时，一个团队保持一致的代码风格和规范，甚至是工具，都是有必要的。 经过一顿 google 之后， 发现git 的 hook pre-commit这个脚本可以指定，再commit之前插入一些脚本执行，要是再这个脚本中加上对代码的格式化">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1285832-3dd63ea9d8e0023b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Git -- git commit hook</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
+         
+          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/05/19/Android-自动生成Getter-Setter/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/05/08/Android-自定义注解学习笔记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&text=Git -- git commit hook"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&title=Git -- git commit hook"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&is_video=false&description=Git -- git commit hook"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Git -- git commit hook&body=Check out this article: https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&title=Git -- git commit hook"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&title=Git -- git commit hook"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&title=Git -- git commit hook"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&title=Git -- git commit hook"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&name=Git -- git commit hook&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Git -- git commit hook
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Tiny</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-05-16T16:01:00.000Z" itemprop="datePublished">2017-05-17</time>
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Git/">Git</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>团队合作项目，使用git时会发生这种情况 ： 每个人的代码格式不同，对比工具再做对比的时候常常会当作冲突来处理，虽然有些工具会有明显的提示，但还是会占用自己太多时间。同时，一个团队保持一致的代码风格和规范，甚至是工具，都是有必要的。</p>
+<p>经过一顿 google 之后， 发现git 的 hook pre-commit这个脚本可以指定，再commit之前插入一些脚本执行，要是再这个脚本中加上对代码的格式化，就解决了这个问题。</p>
+<p>1、代码的格式化工具我选择了google提供的代码格式化工具。<br>项目地址在这里  <a href="https://github.com/google/google-java-format" target="_blank" rel="noopener">https://github.com/google/google-java-format</a><br>通过文档给的方式，在android studio下载一个插件</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-3dd63ea9d8e0023b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>再设置中配置，这里的style我选的是 aosp 的style，因为是android 项目，并没有直接使用默认的。配置好之后，我再对代码进行格式化的时候，就使用了google-java-format，不再是之前再ide中配置的那个了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-282c18e562dfa9f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>2、接下来写shell<br> 我们在项目根目录中可以找到.git 下的hooks文件夹。里面存在一堆文件，就像这样。<br><img src="http://upload-images.jianshu.io/upload_images/1285832-3ab997a5eb96622c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>可以创建一个空文件，名字为pre-commit。这里我直接贴上一段代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#</span><br><span class="line">array=`git diff-index --name-only HEAD`</span><br><span class="line"></span><br><span class="line">for name in $&#123;array&#125;</span><br><span class="line">do</span><br><span class="line">    extension=$&#123;name##*.&#125;</span><br><span class="line">    if [[ $&#123;extension&#125; == &quot;java&quot; || $&#123;extension&#125; == &quot;xml&quot; || $&#123;extension&#125; == &quot;kt&quot; ]];then</span><br><span class="line">      D:\\Applications\\tiny-tool\\formatjava.cmd $&#123;name&#125;</span><br><span class="line">      if [ $? -eq 0 ]; then</span><br><span class="line">      echo &quot;format ok&quot; $&#123;name&#125;</span><br><span class="line">      else exit 1</span><br><span class="line">      fi</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">exec git add ./</span><br></pre></td></tr></table></figure></p>
+<p>大兄弟，别的都好说， <figure class="highlight plain"><figcaption><span>$&#123;name&#125; ```有点看不明白，那是因为还差一个文件没有贴上来。就是formatjava.cmd这个文件</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">@ECHO OFF</span><br><span class="line">java -jar D:\Applications\tiny-tool\google-java-format-1.3-all-deps.jar --replace %*</span><br><span class="line">@ECHO ON</span><br></pre></td></tr></table></figure></p>
+<p>看这个工具还挺好用，可以直接格式化java代码，直接写一个cmd放到系统path中去，平时也能使用。</p>
+<p>这样，再git commit 之后，会自动将提交的java文件进行格式化。这样就在本地和远程都使用同一套代码规范了。</p>
+<p>ps：有个问题，google-java-format-1.3-all-deps.jar这个版本的会把java doc 也格式化了， 蛋疼， 还好有广大网友的帮助<br><a href="https://github.com/Kurt-Bonatz/google-java-format/tree/skip_javadoc_formatting" target="_blank" rel="noopener">https://github.com/Kurt-Bonatz/google-java-format/tree/skip_javadoc_formatting</a><br>这个提交已经添加到了google的代码中了， 就等着google更新， 或者直接把代码撸下来编译</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-6aa2d6812f99467e.gif?imageMogr2/auto-orient/strip" alt="c2adb464jw1edbze0mbitg2064064kjb.gif"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
+         
+          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&text=Git -- git commit hook"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&title=Git -- git commit hook"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&is_video=false&description=Git -- git commit hook"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Git -- git commit hook&body=Check out this article: https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&title=Git -- git commit hook"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&title=Git -- git commit hook"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&title=Git -- git commit hook"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&title=Git -- git commit hook"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://lavenderstream.github.io/2017/05/17/GIt-git-commit-hook/&name=Git -- git commit hook&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Tiny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
+         
+          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

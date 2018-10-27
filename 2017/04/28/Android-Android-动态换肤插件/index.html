@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="之前写了一个android夜间模式的框架，只能修改黑夜和白天。但需求总是不轻易满足现状，随随便便就能整出一个动态换肤的幺蛾子来，而且是插件式的。 跟之前夜间模式的想法一样，不能接受对现有代码入侵，最好别再java文件里写东西，最好少改代码…… 无图言吊，所以先上图  再撸这套动态换肤之前，我参考hyman大神的几篇博客， 实现思路基本上相同，但是还是有些改动的，这是大神的项目https://git">
+<meta name="keywords" content="top">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android -- Android 动态换肤插件">
+<meta property="og:url" content="https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/index.html">
+<meta property="og:site_name" content="Tiny hexo">
+<meta property="og:description" content="之前写了一个android夜间模式的框架，只能修改黑夜和白天。但需求总是不轻易满足现状，随随便便就能整出一个动态换肤的幺蛾子来，而且是插件式的。 跟之前夜间模式的想法一样，不能接受对现有代码入侵，最好别再java文件里写东西，最好少改代码…… 无图言吊，所以先上图  再撸这套动态换肤之前，我参考hyman大神的几篇博客， 实现思路基本上相同，但是还是有些改动的，这是大神的项目https://git">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-bee0e7fe4bcb0e89.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-e80de554712c935e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-44d29a67e485038e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-10-27T05:20:50.929Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android -- Android 动态换肤插件">
+<meta name="twitter:description" content="之前写了一个android夜间模式的框架，只能修改黑夜和白天。但需求总是不轻易满足现状，随随便便就能整出一个动态换肤的幺蛾子来，而且是插件式的。 跟之前夜间模式的想法一样，不能接受对现有代码入侵，最好别再java文件里写东西，最好少改代码…… 无图言吊，所以先上图  再撸这套动态换肤之前，我参考hyman大神的几篇博客， 实现思路基本上相同，但是还是有些改动的，这是大神的项目https://git">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1285832-bee0e7fe4bcb0e89.gif?imageMogr2/auto-orient/strip">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Android -- Android 动态换肤插件</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
+         
+          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/05/04/Android-系统分屏模式学习笔记/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/04/01/Android-Rx应用场景记录/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&text=Android -- Android 动态换肤插件"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&title=Android -- Android 动态换肤插件"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&is_video=false&description=Android -- Android 动态换肤插件"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android -- Android 动态换肤插件&body=Check out this article: https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&title=Android -- Android 动态换肤插件"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&title=Android -- Android 动态换肤插件"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&title=Android -- Android 动态换肤插件"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&title=Android -- Android 动态换肤插件"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&name=Android -- Android 动态换肤插件&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、初始化"><span class="toc-number">1.</span> <span class="toc-text">1、初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、注册监听"><span class="toc-number">2.</span> <span class="toc-text">2、注册监听</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、使用databindning创建布局"><span class="toc-number">3.</span> <span class="toc-text">3、使用databindning创建布局</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、更改皮肤"><span class="toc-number">4.</span> <span class="toc-text">4、更改皮肤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、响应更改"><span class="toc-number">5.</span> <span class="toc-text">5、响应更改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、皮肤包的制作"><span class="toc-number">6.</span> <span class="toc-text">6、皮肤包的制作</span></a></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#实现思路"><span class="toc-number"></span> <span class="toc-text">实现思路</span></a>
+    </li></div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android -- Android 动态换肤插件
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Tiny</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-04-28T09:43:00.000Z" itemprop="datePublished">2017-04-28</time>
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/top/">top</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>之前写了一个android夜间模式的框架，只能修改黑夜和白天。但需求总是不轻易满足现状，随随便便就能整出一个动态换肤的幺蛾子来，而且是插件式的。</p>
+<p>跟之前夜间模式的想法一样，不能接受对现有代码入侵，最好别再java文件里写东西，最好少改代码……</p>
+<p>无图言吊，所以先上图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-bee0e7fe4bcb0e89.gif?imageMogr2/auto-orient/strip" alt="ezgif-3-a0265ceb11.gif"></p>
+<p>再撸这套动态换肤之前，我参考hyman大神的几篇博客， 实现思路基本上相同，但是还是有些改动的，这是大神的项目<br><a href="https://github.com/hongyangAndroid/ChangeSkin" target="_blank" rel="noopener">https://github.com/hongyangAndroid/ChangeSkin</a></p>
+<p>先不说逻辑了， 先记录一下框架的使用方法，之后再详细讲一下思路，请看下面华丽的分割线</p>
+<hr>
+<h4 id="1、初始化"><a href="#1、初始化" class="headerlink" title="1、初始化"></a>1、初始化</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Night.getInstance().initNight(this, S_SKIN_PATH, DEFAULT_SKIN, R.color.class);</span><br></pre></td></tr></table></figure>
+<p>调用这个方法进行初始化<br>第一个是上下文，获取的是application的上下文<br>二，存放皮肤的目录，sd卡上的，路径后面要有\ 看起来得是sdcard/xxx/xxx/才中<br>下面是皮肤名字，只是个代号而已，填什么程序就会去找什么，当然默认值是固定的<br>最后一个参数很重要，基本上，传R.drawable.class 和  R.color.class 就够用了，R是本应用的R.java</p>
+<h4 id="2、注册监听"><a href="#2、注册监听" class="headerlink" title="2、注册监听"></a>2、注册监听</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Night.getInstance().addListener(this);</span><br><span class="line">Night.getInstance().addError(this);</span><br></pre></td></tr></table></figure>
+<p>第一个接口会在模式发生改变时调用<br>第二个会在错误时调用<br>最好是写个base， 把这些放进去，用到的时候直接复写。想那些改变布局状态时不存在的界面，就用不到这两个回调了</p>
+<h4 id="3、使用databindning创建布局"><a href="#3、使用databindning创建布局" class="headerlink" title="3、使用databindning创建布局"></a>3、使用databindning创建布局</h4><p>hongyang大神的代码，在xml设置了tag。 问题就在这里，要是这个view set了tag，这不就尴尬了， 所以用了databinding，再设置tag时前面填了一个id。所以再setContentView的时候， 要调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataBindingUtil.setContentView(this, R.layout.activity_main);</span><br></pre></td></tr></table></figure></p>
+<h4 id="4、更改皮肤"><a href="#4、更改皮肤" class="headerlink" title="4、更改皮肤"></a>4、更改皮肤</h4><p>在要更改皮肤的地方调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Night.getInstance().setNight(&quot;yellow&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>参数是资源包的名字</p>
+<h4 id="5、响应更改"><a href="#5、响应更改" class="headerlink" title="5、响应更改"></a>5、响应更改</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Override</span><br><span class="line">    public void onNightChange() &#123;</span><br><span class="line">        Night.getInstance().change(mBinding.clLayout);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>在回掉中把根ViewGroup传过去，然后程序就会递归调用，设置皮肤颜色。但哪个颜色找不到了，就会再error中回掉，之后怎么处理就随便了（因为是递归调用，只会在找不到相应属性的时候回掉error，要是资源能找到，就会直接更改了）</p>
+<h4 id="6、皮肤包的制作"><a href="#6、皮肤包的制作" class="headerlink" title="6、皮肤包的制作"></a>6、皮肤包的制作</h4><p>又到了做手工的时候了</p>
+<p>再主程序中，我们的color会这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;color name=&quot;bg&quot;&gt;#2e4cef&lt;/color&gt;</span><br><span class="line">    &lt;color name=&quot;bg_night&quot;&gt;#2c3878&lt;/color&gt;</span><br><span class="line"></span><br><span class="line">    &lt;color name=&quot;h&quot;&gt;#ffffff&lt;/color&gt;</span><br><span class="line">    &lt;color name=&quot;h_night&quot;&gt;#f4d300&lt;/color&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure></p>
+<p>解释一下吧，bg是一个颜色，bg_night是当他在夜晚模式时的颜色。皮肤中的颜色和他相同。</p>
+<p>皮肤实际上就是一个apk， 我们拿eclipse创建一个android项目， 除了图片资源，其他的什么都不要</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-e80de554712c935e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-44d29a67e485038e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>这里规定了一下包名，以org开头，后面跟皮肤的名字，算是硬性规定吧<br>之后写颜色<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;color name=&quot;bg&quot;&gt;#ff31d2&lt;/color&gt;</span><br><span class="line">    &lt;color name=&quot;bg_night&quot;&gt;#8f1481&lt;/color&gt;</span><br><span class="line">    &lt;color name=&quot;h&quot;&gt;#00aeff&lt;/color&gt;</span><br><span class="line">    &lt;color name=&quot;h_night&quot;&gt;#ffffff&lt;/color&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure></p>
+<p>一定要跟主程序中的一一对应，不然就找不到资源了</p>
+<p>一切都是这么平静， 弄好之后，直接运行项目，导出apk，然后把后缀去掉。最后将这个包，放到他应该在的目录，这里我就放到sd卡的根目录了。一切也都完成了</p>
+<p>项目的所有代码参考<br><a href="https://github.com/LavenderStream/Night/tree/night2.0" target="_blank" rel="noopener">https://github.com/LavenderStream/Night/tree/night2.0</a><br>两个皮肤包的下载地址<br>pink<br><a href="https://github.com/LavenderStream/Night/blob/night2.0/pink" target="_blank" rel="noopener">https://github.com/LavenderStream/Night/blob/night2.0/pink</a><br>yellow<br><a href="https://github.com/LavenderStream/Night/blob/night2.0/yellow" target="_blank" rel="noopener">https://github.com/LavenderStream/Night/blob/night2.0/yellow</a></p>
+<hr>
+<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><p>1、在执行动态换肤的逻辑当中，涉及到资源，说破大天，也就是color和drawable这两个东西，只需要知道当前的状态然后给view设置上就可以了。</p>
+<p>2、通过反射AssetManager能获取到插件资源包中的Resources对象，再通过getIdentifier方法就能拿到当前资源的id了</p>
+<p>3、要怎么在布局的时候告诉程序，这个空间要加载什么样的资源呢，这里就用到了databinding<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Deprecated</span><br><span class="line">@BindingAdapter(&quot;drawable&quot;)</span><br><span class="line">public static void setDrawable(View view, String valueName) &#123;</span><br><span class="line">    Night.getInstance().drawable(view, valueName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面一行valueName是一个string的字段，他标记了控件的属性名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;RelativeLayout</span><br><span class="line">    android:id=&quot;@+id/cl_layout&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    night:background=&apos;@&#123;&quot;bg&quot;&#125;&apos;</span><br><span class="line">    tools:background=&quot;@color/bg&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>当我们在设置这个控件时，传递了一个<figure class="highlight plain"><figcaption><span>studio并不会实时渲染这个结果，看不见最后布局的样子，这就大大的增加了错误的概率，万一string填错了那就显示不出来了。还有在剔除无用资源是，这个也不会索引进去。所以再xml增加tools，把每一个要换肤的控件同时添加一行tools就可以了</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4、避免不了的是在java代码动态设置，并不通过xml，像一些动态添加的view。这时我们依然可以像databinding一样，去调用静态的方法</span><br></pre></td></tr></table></figure></p>
+<p>NightBind.setDrawable(mBinding.clLayout, “bg”);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">依然是个字符串，还是那个问题，bg写错了呢？</span><br><span class="line">解决这个问题的方法就是，再night框架初始化的时候，反射记录了r文件中的color和drawable的字段名和值。我们通过值去找字段名字了，第二个参数的string就可以改成int了，就是用R.color.xx的形式。</span><br><span class="line">经测试，再70ms之内可以把所有的字段反射读取完，要是担心map存了太多，可以设置几个关键字，有些是系统的字段，像什么abc_ 、design_ 、 material_  、notification_ 以这些开头的我们不添加到map中， 然后自己命名资源文件的时候注意一下就行了，说实话 abc_ 还挺多的。</span><br><span class="line"></span><br><span class="line">图片命名我习惯加ic_ 前缀，颜色的话基本不会有前缀，这样就很好区分了。</span><br></pre></td></tr></table></figure></p>
+<p>NightBind.setDrawable(mBinding.clLayout, R.color.bg);<br><code>`</code><br>这样就大大减少了手抖写错的概率了。</p>
+<p>5、实现流程</p>
+<ul>
+<li>初始化 读取R文件，存放resourceId 和 ResourceName的map对象。并设置好Resource对象和相关资源</li>
+<li>每当状态改变时（初始化状态也是一种改变）xml会通过tag中的string标记，通过当前资源包中的resource和这个tag字段名去找相应的资源；代码动态设置时，会根据传入的id在map中找到相应的string，之后就和在xml中调用的流程一样了</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
+         
+          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、初始化"><span class="toc-number">1.</span> <span class="toc-text">1、初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、注册监听"><span class="toc-number">2.</span> <span class="toc-text">2、注册监听</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、使用databindning创建布局"><span class="toc-number">3.</span> <span class="toc-text">3、使用databindning创建布局</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、更改皮肤"><span class="toc-number">4.</span> <span class="toc-text">4、更改皮肤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、响应更改"><span class="toc-number">5.</span> <span class="toc-text">5、响应更改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、皮肤包的制作"><span class="toc-number">6.</span> <span class="toc-text">6、皮肤包的制作</span></a></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#实现思路"><span class="toc-number"></span> <span class="toc-text">实现思路</span></a>
+    </li></div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&text=Android -- Android 动态换肤插件"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&title=Android -- Android 动态换肤插件"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&is_video=false&description=Android -- Android 动态换肤插件"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android -- Android 动态换肤插件&body=Check out this article: https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&title=Android -- Android 动态换肤插件"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&title=Android -- Android 动态换肤插件"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&title=Android -- Android 动态换肤插件"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&title=Android -- Android 动态换肤插件"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://lavenderstream.github.io/2017/04/28/Android-Android-动态换肤插件/&name=Android -- Android 动态换肤插件&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Tiny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
+         
+          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
