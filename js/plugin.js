@@ -1,15 +1,1 @@
-$(document).ready(function () {
-    console.log("stay hungry , stay foolish . ");
-    _layoutQRCode();
-});
-
-
-function _layoutQRCode() {
-    var path = window.location.href;
-    if (path.endsWith("/about/")) {
-        var img = $("p img");
-        img.css("width", 90);
-        img.css("height", 90);
-        img.css("margin", 0);
-    }
-}
+function _layoutQRCode(){if(window.location.href.endsWith("/about/")){var o=$("p img");o.css("width",90),o.css("height",90),o.css("margin",0)}}$(document).ready(function(){console.log("stay hungry , stay foolish . "),_layoutQRCode()});

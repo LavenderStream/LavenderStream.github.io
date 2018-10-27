@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="adb shell input swipe 250 250 300 300模拟事件全部是通过input命令来实现的，首先看一下input命令的使用：usage: input …input text &amp;lt;string&amp;gt; input keyevent &amp;lt;key code number or name&amp;gt; input tap &amp;lt;x&amp;gt; &amp;lt;y&amp;gt; input swi">
+    <meta name="description" content="adb shell input swipe 250 250 300 300模拟事件全部是通过input命令来实现的，首先看一下input命令的使用：usage: input … input text &amp;lt;string&amp;gt; input keyevent &amp;lt;key code number or name&amp;gt; input tap &amp;lt;x&amp;gt; &amp;lt;y&amp;gt; input sw">
 <meta name="keywords" content="android javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android -- android sendevent模拟滑动点击事件">
 <meta property="og:url" content="https://lavenderstream.github.io/2015/12/22/Android-android-sendevent模拟滑动点击事件/index.html">
 <meta property="og:site_name" content="Tiny hexo">
-<meta property="og:description" content="adb shell input swipe 250 250 300 300模拟事件全部是通过input命令来实现的，首先看一下input命令的使用：usage: input …input text &amp;lt;string&amp;gt; input keyevent &amp;lt;key code number or name&amp;gt; input tap &amp;lt;x&amp;gt; &amp;lt;y&amp;gt; input swi">
+<meta property="og:description" content="adb shell input swipe 250 250 300 300模拟事件全部是通过input命令来实现的，首先看一下input命令的使用：usage: input … input text &amp;lt;string&amp;gt; input keyevent &amp;lt;key code number or name&amp;gt; input tap &amp;lt;x&amp;gt; &amp;lt;y&amp;gt; input sw">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2018-10-27T03:13:16.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android -- android sendevent模拟滑动点击事件">
-<meta name="twitter:description" content="adb shell input swipe 250 250 300 300模拟事件全部是通过input命令来实现的，首先看一下input命令的使用：usage: input …input text &amp;lt;string&amp;gt; input keyevent &amp;lt;key code number or name&amp;gt; input tap &amp;lt;x&amp;gt; &amp;lt;y&amp;gt; input swi">
+<meta name="twitter:description" content="adb shell input swipe 250 250 300 300模拟事件全部是通过input命令来实现的，首先看一下input命令的使用：usage: input … input text &amp;lt;string&amp;gt; input keyevent &amp;lt;key code number or name&amp;gt; input tap &amp;lt;x&amp;gt; &amp;lt;y&amp;gt; input sw">
     
     
         
@@ -139,11 +139,41 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>adb shell input swipe 250 250 300 300<br>模拟事件全部是通过input命令来实现的，首先看一下input命令的使用：<br>usage: input …</p><pre><code>input text &lt;string&gt;
+    <p>adb shell input swipe 250 250 300 300<br>模拟事件全部是通过input命令来实现的，首先看一下input命令的使用：<br>usage: input …</p>
+<pre><code>input text &lt;string&gt;
 input keyevent &lt;key code number or name&gt;
 input tap &lt;x&gt; &lt;y&gt;
 input swipe &lt;x1&gt; &lt;y1&gt; &lt;x2&gt; &lt;y2&gt;
-</code></pre><ol><li>keyevent指的是android对应的keycode，比如home键的keycode=3，back键的keycode=4.</li></ol><p>具体请查阅<android keycode详解=""><a href="http://blog.csdn.net/huiguixian/article/details/8550170" target="_blank" rel="noopener">http://blog.csdn.net/huiguixian/article/details/8550170</a></android></p><p>然后使用的话比较简单，比如想模拟home按键：</p><p>adb shell input keyevent 3</p><p>请查阅上述文章，根据具体keycode编辑即可。</p><ol start="2"><li>关于tap的话，他模拟的是touch屏幕的事件，只需给出x、y坐标即可。</li></ol><p>此x、y坐标对应的是真实的屏幕分辨率，所以要根据具体手机具体看，比如你想点击屏幕(x, y) = (250, 250)位置：</p><p>adb shell input tap 250 250</p><ol start="3"><li>关于swipe同tap是一样的，只是他是模拟滑动的事件，给出起点和终点的坐标即可。例如从屏幕(250, 250), 到屏幕(300, 300)即</li></ol><p>adb shell input swipe 250 250 300 300<br>在项目中实现陀螺仪翻页的解决策略</p><p>竖屏</p><p>向右滑 ：input swipe 50 1000 650 1000 -&gt;</p><p>向左滑： input swipe 650 1000 50 1000 &lt;-</p><hr><p>横屏</p><p>默认点击屏幕在横屏状态下的中心位置 input tap 627 283 （可以完成例如在相册页面的）</p><p>向右滑 ：input swipe 600 300 800 300 -&gt; (适用于小范围的移动。 例如相册的展示页面)</p><p>向左滑 ：input swipe 800 300 60 300 &lt;- (适用于小范围的移动。 例如相册的展示页面)</p><p>向右滑 ：input swipe 200 300 1200 300 -&gt; (适用于大范围的移动。 例如相册的单张浏览模式)</p><p>向右滑 ：input swipe 1200 300 200 300 &lt;- (适用于大范围的移动。 例如相册的单张浏览模式)</p><p>superbar中使用命令在不申请root的条件下打开设备文件节点的权限<br>打开设备文件节点的权限：chmod 666 /dev/input/*<br>查看设备文节点的权限： ll /dev/input</p><p>android RingSDK 的事件注入<br><a href="https://code.google.com/p/android-event-injector/" target="_blank" rel="noopener">https://code.google.com/p/android-event-injector/</a></p><p>ps：在没有OTG线的情况下连接电脑，通过命令打开任意的app<br>adb shell am start com.wormhole.glass1/com.wormhole.glass.MainActivit</p>
+</code></pre><ol>
+<li>keyevent指的是android对应的keycode，比如home键的keycode=3，back键的keycode=4.</li>
+</ol>
+<p>具体请查阅 <android keycode详解=""> <a href="http://blog.csdn.net/huiguixian/article/details/8550170" target="_blank" rel="noopener">http://blog.csdn.net/huiguixian/article/details/8550170</a></android></p>
+<p>然后使用的话比较简单，比如想模拟home按键：</p>
+<p>adb shell input keyevent 3</p>
+<p>请查阅上述文章，根据具体keycode编辑即可。</p>
+<ol start="2">
+<li>关于tap的话，他模拟的是touch屏幕的事件，只需给出x、y坐标即可。</li>
+</ol>
+<p>此x、y坐标对应的是真实的屏幕分辨率，所以要根据具体手机具体看，比如你想点击屏幕(x, y) = (250, 250)位置：</p>
+<p>adb shell input tap 250 250</p>
+<ol start="3">
+<li>关于swipe同tap是一样的，只是他是模拟滑动的事件，给出起点和终点的坐标即可。例如从屏幕(250, 250), 到屏幕(300, 300)即</li>
+</ol>
+<p>adb shell input swipe 250 250 300 300<br>在项目中实现陀螺仪翻页的解决策略</p>
+<p>竖屏</p>
+<p>向右滑 ：input swipe 50 1000 650 1000 -&gt;</p>
+<p>向左滑： input swipe 650 1000 50 1000 &lt;-</p>
+<hr>
+<p>横屏</p>
+<p>默认点击屏幕在横屏状态下的中心位置 input tap 627 283 （可以完成例如在相册页面的）</p>
+<p>向右滑 ：input swipe 600 300 800 300 -&gt; (适用于小范围的移动。 例如相册的展示页面)</p>
+<p>向左滑 ：input swipe 800 300 60 300 &lt;- (适用于小范围的移动。 例如相册的展示页面)</p>
+<p>向右滑 ：input swipe 200 300 1200 300 -&gt; (适用于大范围的移动。 例如相册的单张浏览模式)</p>
+<p>向右滑 ：input swipe 1200 300 200 300 &lt;- (适用于大范围的移动。 例如相册的单张浏览模式)</p>
+<p>superbar中使用命令在不申请root的条件下打开设备文件节点的权限<br>打开设备文件节点的权限：chmod 666 /dev/input/*<br>查看设备文节点的权限： ll /dev/input</p>
+<p>android RingSDK 的事件注入<br><a href="https://code.google.com/p/android-event-injector/" target="_blank" rel="noopener">https://code.google.com/p/android-event-injector/</a></p>
+<p>ps：在没有OTG线的情况下连接电脑，通过命令打开任意的app<br>adb shell am start com.wormhole.glass1/com.wormhole.glass.MainActivit</p>
+
   </div>
 </article>
 

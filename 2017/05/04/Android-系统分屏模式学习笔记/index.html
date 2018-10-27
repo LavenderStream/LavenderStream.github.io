@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="今天特意关注了一下 android 7.0的分屏模式，发现分屏模式后，自己的应用基本上不能运行了1、生命周期说多窗口模式不会影响activity的生命周期，那好。按下菜单键之后应用分屏了从分屏模式展开到正常模式第二张图， 最后的onPause和onResume是什么鬼？2、fragment变成分屏模式之后,fragment的状态会被保存起来。我在程序中直接new fragment 然后add 进去">
+    <meta name="description" content="今天特意关注了一下 android 7.0的分屏模式，发现分屏模式后，自己的应用基本上不能运行了 1、生命周期  说多窗口模式不会影响activity的生命周期，那好。 按下菜单键之后 应用分屏了从分屏模式展开到正常模式 第二张图， 最后的onPause和onResume是什么鬼？  2、fragment变成分屏模式之后,fragment的状态会被保存起来。我在程序中直接new fragment">
 <meta name="keywords" content="android javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android -- 系统分屏模式学习笔记">
 <meta property="og:url" content="https://lavenderstream.github.io/2017/05/04/Android-系统分屏模式学习笔记/index.html">
 <meta property="og:site_name" content="Tiny hexo">
-<meta property="og:description" content="今天特意关注了一下 android 7.0的分屏模式，发现分屏模式后，自己的应用基本上不能运行了1、生命周期说多窗口模式不会影响activity的生命周期，那好。按下菜单键之后应用分屏了从分屏模式展开到正常模式第二张图， 最后的onPause和onResume是什么鬼？2、fragment变成分屏模式之后,fragment的状态会被保存起来。我在程序中直接new fragment 然后add 进去">
+<meta property="og:description" content="今天特意关注了一下 android 7.0的分屏模式，发现分屏模式后，自己的应用基本上不能运行了 1、生命周期  说多窗口模式不会影响activity的生命周期，那好。 按下菜单键之后 应用分屏了从分屏模式展开到正常模式 第二张图， 最后的onPause和onResume是什么鬼？  2、fragment变成分屏模式之后,fragment的状态会被保存起来。我在程序中直接new fragment">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-5d147a911ef62789.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1285832-e93094309686e215.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -22,7 +22,7 @@
 <meta property="og:updated_time" content="2018-10-27T03:23:30.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android -- 系统分屏模式学习笔记">
-<meta name="twitter:description" content="今天特意关注了一下 android 7.0的分屏模式，发现分屏模式后，自己的应用基本上不能运行了1、生命周期说多窗口模式不会影响activity的生命周期，那好。按下菜单键之后应用分屏了从分屏模式展开到正常模式第二张图， 最后的onPause和onResume是什么鬼？2、fragment变成分屏模式之后,fragment的状态会被保存起来。我在程序中直接new fragment 然后add 进去">
+<meta name="twitter:description" content="今天特意关注了一下 android 7.0的分屏模式，发现分屏模式后，自己的应用基本上不能运行了 1、生命周期  说多窗口模式不会影响activity的生命周期，那好。 按下菜单键之后 应用分屏了从分屏模式展开到正常模式 第二张图， 最后的onPause和onResume是什么鬼？  2、fragment变成分屏模式之后,fragment的状态会被保存起来。我在程序中直接new fragment">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1285832-5d147a911ef62789.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
     
@@ -147,7 +147,18 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>今天特意关注了一下 android 7.0的分屏模式，发现分屏模式后，自己的应用基本上不能运行了</p><p>1、生命周期</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-5d147a911ef62789.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p><p>说多窗口模式不会影响activity的生命周期，那好。</p><p>按下菜单键之后</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-e93094309686e215.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>应用分屏了<br><img src="http://upload-images.jianshu.io/upload_images/1285832-8994b478328dc31b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>从分屏模式展开到正常模式<br><img src="http://upload-images.jianshu.io/upload_images/1285832-c9d8222fc6867e33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p><p>第二张图， 最后的onPause和onResume是什么鬼？</p><p><img src="http://upload-images.jianshu.io/upload_images/1285832-2c375e26b4930e60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p><p>2、fragment<br>变成分屏模式之后,fragment的状态会被保存起来。我在程序中直接new fragment 然后add 进去了。这。。。<br>每次进来就两个fragment了。</p><p>问题1、2都不是问题，都可以解决，but，每次切换模式的时候都要重新执行所有网络请求么。</p><p>暂时还是<code>android:resizeableActivity=&quot;false&quot;</code>老老实实做一个低端应用吧</p>
+    <p>今天特意关注了一下 android 7.0的分屏模式，发现分屏模式后，自己的应用基本上不能运行了</p>
+<p>1、生命周期</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-5d147a911ef62789.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>说多窗口模式不会影响activity的生命周期，那好。</p>
+<p>按下菜单键之后</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-e93094309686e215.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>应用分屏了<br><img src="http://upload-images.jianshu.io/upload_images/1285832-8994b478328dc31b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>从分屏模式展开到正常模式<br><img src="http://upload-images.jianshu.io/upload_images/1285832-c9d8222fc6867e33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>第二张图， 最后的onPause和onResume是什么鬼？</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1285832-2c375e26b4930e60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>2、fragment<br>变成分屏模式之后,fragment的状态会被保存起来。我在程序中直接new fragment 然后add 进去了。这。。。<br>每次进来就两个fragment了。</p>
+<p>问题1、2都不是问题，都可以解决，but，每次切换模式的时候都要重新执行所有网络请求么。</p>
+<p>暂时还是<code>android:resizeableActivity=&quot;false&quot;</code>老老实实做一个低端应用吧</p>
+
   </div>
 </article>
 
