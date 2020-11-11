@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="CLASS FORMAT123456789101112131415161718ClassFile &amp;#123;    u4               magic;    u2               minor_version;    u2               major_version;    u2               constant_pool_count;    cp_">
+<meta name="keywords" content="android javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java -- Java Class Format">
+<meta property="og:url" content="https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/index.html">
+<meta property="og:site_name" content="Tiny hexo">
+<meta property="og:description" content="CLASS FORMAT123456789101112131415161718ClassFile &amp;#123;    u4               magic;    u2               minor_version;    u2               major_version;    u2               constant_pool_count;    cp_">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-11-11T07:07:35.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java -- Java Class Format">
+<meta name="twitter:description" content="CLASS FORMAT123456789101112131415161718ClassFile &amp;#123;    u4               magic;    u2               minor_version;    u2               major_version;    u2               constant_pool_count;    cp_">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Java -- Java Class Format</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+    <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+    <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+    <span id="menu">
+    <span id="nav">
+      <ul>
+          
+          
+          <li><a href="/">Home</a></li>
+          
+          
+          <li><a href="/archives/">Writing</a></li>
+          
+          
+          <li><a href="https://www.jianshu.com/u/4215db84d54e" target="_blank">JianShu</a></li>
+          
+          
+          <li><a href="https://github.com/LavenderStream" target="_blank">GitHub</a></li>
+          
+          
+          <li><a href="/about/">About</a></li>
+          
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+          
+          
+          <li><a class="icon" href="/2020/11/11/RN-React-Native-Debugger-失败/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+          
+          <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&text=Java -- Java Class Format"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&title=Java -- Java Class Format"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&is_video=false&description=Java -- Java Class Format"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Java -- Java Class Format&body=Check out this article: https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&title=Java -- Java Class Format"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&title=Java -- Java Class Format"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&title=Java -- Java Class Format"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&title=Java -- Java Class Format"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&name=Java -- Java Class Format&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#CLASS-FORMAT"><span class="toc-number">1.</span> <span class="toc-text">CLASS FORMAT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Constant-Type"><span class="toc-number">2.</span> <span class="toc-text">Constant Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Constant-Type-Info"><span class="toc-number">3.</span> <span class="toc-text">Constant Type Info</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACCESS-FLAGS"><span class="toc-number">4.</span> <span class="toc-text">ACCESS_FLAGS</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Java -- Java Class Format
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Tiny</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-11-11T07:05:00.000Z" itemprop="datePublished">2020-11-11</time>
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="CLASS-FORMAT"><a href="#CLASS-FORMAT" class="headerlink" title="CLASS FORMAT"></a>CLASS FORMAT</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">ClassFile</span> &#123;  </span><br><span class="line">  <span class="attribute">u4</span>               magic;  </span><br><span class="line">  <span class="attribute">u2</span>               minor_version;  </span><br><span class="line">  <span class="attribute">u2</span>               major_version;  </span><br><span class="line">  <span class="attribute">u2</span>               constant_pool_count;  </span><br><span class="line">  <span class="attribute">cp_info</span>          constant_pool[constant_pool_count - <span class="number">1</span>];  </span><br><span class="line">  <span class="attribute">u2</span>               access_flags;  </span><br><span class="line">  <span class="attribute">u2</span>               this_class;  </span><br><span class="line">  <span class="attribute">u2</span>               super_class;  </span><br><span class="line">  <span class="attribute">u2</span>               interfaces_count;  </span><br><span class="line">  <span class="attribute">u2</span>               interfaces[interfaces_count];  </span><br><span class="line">  <span class="attribute">u2</span>               fields_count;  </span><br><span class="line">  <span class="attribute">field_info</span>       fields[fields_count];  </span><br><span class="line">  <span class="attribute">u2</span>               methods_count;  </span><br><span class="line">  <span class="attribute">method_info</span>      methods[methods_count];  </span><br><span class="line">  <span class="attribute">u2</span>               attributes_count;  </span><br><span class="line">  <span class="attribute">attribute_info</span>   attributes[attributes_count];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">cp_info</span> &#123;</span><br><span class="line">  <span class="attribute">u1</span> tag;</span><br><span class="line">  <span class="attribute">u2</span> name_index;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">field_info</span> &#123;</span><br><span class="line">  <span class="attribute">u2</span> access_flags; </span><br><span class="line">  <span class="attribute">u2</span> name_index; </span><br><span class="line">  <span class="attribute">u2</span> descriptor_index; </span><br><span class="line">  <span class="attribute">u2</span> attributes_count; </span><br><span class="line">  <span class="attribute">attribute_info</span> attributes[attributes_count];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">method_info</span> &#123;</span><br><span class="line">  <span class="attribute">u2</span> access_flags;</span><br><span class="line">  <span class="attribute">u2</span> name_index;</span><br><span class="line">  <span class="attribute">u2</span> descriptor_index;</span><br><span class="line">  <span class="attribute">u2</span> attributes_count;</span><br><span class="line">  <span class="attribute">attribute_info</span> attributes[attributes_count];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">attribute_info</span> &#123;</span><br><span class="line">  <span class="attribute">u2</span> attribute_name_index;</span><br><span class="line">  <span class="attribute">u4</span> attribute_length;</span><br><span class="line">  <span class="attribute">u1</span> <span class="literal">info</span>[attribute_length];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Constant-Type"><a href="#Constant-Type" class="headerlink" title="Constant Type"></a>Constant Type</h3><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CONSTANT_Utf8</td>
+<td>1</td>
+</tr>
+<tr>
+<td>CONSTANT_Integer</td>
+<td>3</td>
+</tr>
+<tr>
+<td>CONSTANT_Float</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CONSTANT_Long</td>
+<td>5</td>
+</tr>
+<tr>
+<td>CONSTANT_Double</td>
+<td>6</td>
+</tr>
+<tr>
+<td>CONSTANT_Class</td>
+<td>7</td>
+</tr>
+<tr>
+<td>CONSTANT_String</td>
+<td>8</td>
+</tr>
+<tr>
+<td>CONSTANT_Fieldref</td>
+<td>9</td>
+</tr>
+<tr>
+<td>CONSTANT_Methodref</td>
+<td>10</td>
+</tr>
+<tr>
+<td>CONSTANT_InterfaceMethodref</td>
+<td>11</td>
+</tr>
+<tr>
+<td>CONSTANT_NameAndType</td>
+<td>12</td>
+</tr>
+<tr>
+<td>CONSTANT_MethodHandle</td>
+<td>15</td>
+</tr>
+<tr>
+<td>CONSTANT_MethodType</td>
+<td>16</td>
+</tr>
+<tr>
+<td>CONSTANT_InvokeDynamic</td>
+<td>18</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Constant-Type-Info"><a href="#Constant-Type-Info" class="headerlink" title="Constant Type Info"></a>Constant Type Info</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">CONSTANT_Utf8_info</span> &#123;  </span><br><span class="line">   <span class="attribute">u1</span> tag;  </span><br><span class="line">   <span class="attribute">u2</span> length;  </span><br><span class="line">   <span class="attribute">u1</span> bytes[length];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">CONSTANT_Integer_info</span> &#123;  </span><br><span class="line">   <span class="attribute">u1</span> tag;  </span><br><span class="line">   <span class="attribute">u4</span> bytes;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">CONSTANT_Float_info</span> &#123;  </span><br><span class="line">   <span class="attribute">u1</span> tag;  </span><br><span class="line">   <span class="attribute">u4</span> bytes;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">CONSTANT_Long_info</span> &#123;  </span><br><span class="line">   <span class="attribute">u1</span> tag;  </span><br><span class="line">   <span class="attribute">u4</span> high_bytes;  </span><br><span class="line">   <span class="attribute">u4</span> low_bytes;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">CONSTANT_Double_info</span> &#123;  </span><br><span class="line">   <span class="attribute">u1</span> tag;  </span><br><span class="line">   <span class="attribute">u4</span> high_bytes;  </span><br><span class="line">   <span class="attribute">u4</span> low_bytes;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">CONSTANT_Class_info</span> &#123;  </span><br><span class="line">   <span class="attribute">u1</span> tag;  </span><br><span class="line">   <span class="attribute">u2</span> name_index;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">CONSTANT_String_info</span> &#123;  </span><br><span class="line">   <span class="attribute">u1</span> tag;  </span><br><span class="line">   <span class="attribute">u2</span> string_index;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">CONSTANT_Fieldref_info</span> &#123;  </span><br><span class="line">   <span class="attribute">u1</span> tag;  </span><br><span class="line">   <span class="attribute">u2</span> class_index;  </span><br><span class="line">   <span class="attribute">u2</span> name_and_type_index;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">CONSTANT_Methodref_info</span> &#123;  </span><br><span class="line">   <span class="attribute">u1</span> tag;  </span><br><span class="line">   <span class="attribute">u2</span> class_index;  </span><br><span class="line">   <span class="attribute">u2</span> name_and_type_index;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">CONSTANT_InterfaceMethodref_info</span> &#123;  </span><br><span class="line">   <span class="attribute">u1</span> tag;  </span><br><span class="line">   <span class="attribute">u2</span> class_index;  </span><br><span class="line">   <span class="attribute">u2</span> name_and_type_index;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">CONSTANT_NameAndType_info</span> &#123;  </span><br><span class="line">   <span class="attribute">u1</span> tag;  </span><br><span class="line">   <span class="attribute">u2</span> name_index;  </span><br><span class="line">   <span class="attribute">u2</span> descriptor_index;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">CONSTANT_InvokeDynamic_info</span> &#123;</span><br><span class="line">   <span class="attribute">u1</span> tag;</span><br><span class="line">   <span class="attribute">u2</span> bootstrap_method_attr_index;</span><br><span class="line">   <span class="attribute">u2</span> name_and_type_index;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ACCESS-FLAGS"><a href="#ACCESS-FLAGS" class="headerlink" title="ACCESS_FLAGS"></a>ACCESS_FLAGS</h3><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+<th>Desc</th>
+<th>-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACC_PUBLIC</td>
+<td>0x0001</td>
+<td>public类型</td>
+<td>所有类型</td>
+</tr>
+<tr>
+<td>ACC_FINAL</td>
+<td>0x0010</td>
+<td>final类型</td>
+<td>类</td>
+</tr>
+<tr>
+<td>ACC_SUPER</td>
+<td>0x0020</td>
+<td>使用新的invokespecial语义</td>
+<td>类和接口</td>
+</tr>
+<tr>
+<td>ACC_INTERFACE</td>
+<td>0x0200</td>
+<td>接口类型</td>
+<td>接口</td>
+</tr>
+<tr>
+<td>ACC_ABSTRACT</td>
+<td>0x0400</td>
+<td>抽象类型</td>
+<td>类和接口</td>
+</tr>
+<tr>
+<td>ACC_SYNTHETIC</td>
+<td>0x1000</td>
+<td>该类不由用户代码生成</td>
+<td>所有类型</td>
+</tr>
+<tr>
+<td>ACC_ANNOTATION</td>
+<td>0x2000</td>
+<td>注解类型</td>
+<td>注解</td>
+</tr>
+<tr>
+<td>ACC_ENUM</td>
+<td>0x4000</td>
+<td>枚举类型</td>
+<td>枚举</td>
+</tr>
+</tbody>
+</table>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://www.jianshu.com/u/4215db84d54e">JianShu</a></li>
+         
+          <li><a href="https://github.com/LavenderStream">GitHub</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#CLASS-FORMAT"><span class="toc-number">1.</span> <span class="toc-text">CLASS FORMAT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Constant-Type"><span class="toc-number">2.</span> <span class="toc-text">Constant Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Constant-Type-Info"><span class="toc-number">3.</span> <span class="toc-text">Constant Type Info</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACCESS-FLAGS"><span class="toc-number">4.</span> <span class="toc-text">ACCESS_FLAGS</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&text=Java -- Java Class Format"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&title=Java -- Java Class Format"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&is_video=false&description=Java -- Java Class Format"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Java -- Java Class Format&body=Check out this article: https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&title=Java -- Java Class Format"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&title=Java -- Java Class Format"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&title=Java -- Java Class Format"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&title=Java -- Java Class Format"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://lavenderstream.github.io/2020/11/11/Java-Java-Class-Format/&name=Java -- Java Class Format&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+    <div class="footer-left">
+        Copyright &copy; 2020 by Tiny
+    </div>
+    <div class="footer-right">
+        <nav>
+            <ul>
+                
+                
+                <li><a href="/">Home</a></li>
+                
+                
+                <li><a href="/archives/">Writing</a></li>
+                
+                
+                <li><a href="https://www.jianshu.com/u/4215db84d54e" target="_blank">JianShu</a></li>
+                
+                
+                <li><a href="https://github.com/LavenderStream" target="_blank">GitHub</a></li>
+                
+                
+                <li><a href="/about/">About</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/plugin.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
